@@ -1,5 +1,6 @@
 package com.station.lab8;
 
+import javafx.geometry.Pos;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.PriorityQueue;
@@ -13,14 +14,17 @@ public class CashRegister implements ICashRegister, Runnable{
     private boolean serviceable;
     private boolean reserved;
 
+    private Position position;
+
     public CashRegister() {
     }
 
-    public CashRegister(PriorityQueue<ICustomer> queue, int entrancesCount, boolean serviceable, boolean reserved) {
+    public CashRegister(PriorityQueue<ICustomer> queue, int entrancesCount, boolean serviceable, boolean reserved, Position position) {
         this.queue = queue;
         this.entrancesCount = entrancesCount;
         this.serviceable = serviceable;
         this.reserved = reserved;
+        this.position = position;
     }
 
     public static int getServiceTime() {
@@ -66,16 +70,37 @@ public class CashRegister implements ICashRegister, Runnable{
     @Override
     public void serve() {
         logger.log(Level.INFO,"serving customer");
-        throw new NotImplementedException();
+        try {
+            Thread.sleep(serviceTime);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        this.queue.remove(this.queue.peek());
+    }
+
+    public void addCustomer(Customer customer){
+        this.queue.add(customer);
     }
 
     @Override
     public void makeBreak() {
-        throw new NotImplementedException();
+        this.serviceable = false;
     }
 
     @Override
     public void run() {
-        throw new NotImplementedException();
+        while(serviceable){
+            if (!queue.isEmpty()) {
+                this.serve();
+            }
+        }
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

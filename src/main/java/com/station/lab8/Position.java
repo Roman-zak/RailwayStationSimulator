@@ -27,4 +27,8 @@ public class Position {
     public void setY(int y) {
         this.y = y;
     }
+
+    public int Distance(Position position){
+        return (int) (this.x- position.x)*(this.x- position.x) + (this.y- position.y)*(this.y- position.y);
+    }
 }

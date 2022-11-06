@@ -16,26 +16,27 @@ public class Customer implements ICustomer{
 
     @Override
     public void setTicketsCount(int ticketsCount) {
-
+        this.ticketsCount = ticketsCount;
     }
-
-    public int getTicketsCount() {
-        return ticketsCount;
-    }
-
-    public CustomerStatus getStatus() {
-        return status;
-    }
-
+    @Override
     public void setStatus(CustomerStatus status) {
         this.status = status;
     }
 
+    @Override
+    public void setEntrance(Entrance entrance) {
+        this.entrance = entrance;
+    }
+
+
+    public int getTicketsCount() {
+        return ticketsCount;
+    }
+    public CustomerStatus getStatus() {
+        return status;
+    }
     public Entrance getEntrance() {
         return entrance;
     }
 
-    public void setEntrance(Entrance entrance) {
-        this.entrance = entrance;
-    }
 }
