@@ -6,14 +6,11 @@ import java.util.List;
 
 public class QueueResolver implements IQueueResolver {
     @Override
-    public void appointCustomerToQueue(List<ICashRegister> cashRegisters, ICustomer customer) {
-        throw new NotImplementedException();
-    }
-    public static Position GetPosition(List<CashRegister> cashRegisterList,Position start){
+    public Position getPosition(List<CashRegister> cashRegisters, Position start) {
         Position bestPosition = new Position();
         CashRegister temp = new CashRegister();
-        temp = cashRegisterList.get(0);
-        for (CashRegister cr:cashRegisterList) {
+        temp = cashRegisters.get(0);
+        for (CashRegister cr:cashRegisters) {
             if (cr.getQueue().size()==0){
                 bestPosition = cr.getPosition();
                 break;
@@ -29,4 +26,13 @@ public class QueueResolver implements IQueueResolver {
         return bestPosition;
     }
 
+    @Override
+    public void appointCustomerToQueue(List<CashRegister> cashRegisters, Customer customer) {
+        Position position = getPosition(cashRegisters, customer.getEntrance().getPosition());
+        for (CashRegister cashRegister: cashRegisters) {
+            if(cashRegister.getPosition()==position){
+                cashRegister.getQueue().add(customer);
+            }
+        }
+    }
 }
