@@ -9,6 +9,7 @@ public class Station {
     List<Entrance> entrances;
     IQueueResolver queueResolver;
     int capacity;
+    int currentPeopleCount;
     double criticalFraction; //[0-1]
     private Station(){
 
@@ -25,13 +26,14 @@ public class Station {
         }
     }
     public boolean isFull(){
-        throw new NotImplementedException();
+        return currentPeopleCount >= capacity;
     }
-    public void updateQueues(Customer customer){ //appoint customer to the queue
+    public void updateQueues(Customer customer){
         queueResolver.appointCustomerToQueue(cashRegisters, customer);
-        throw new NotImplementedException();
     }
     public void useReservedCashRegister(ICashRegister stoppedCashRegister){
-        throw new NotImplementedException();
+        var reservedCashRegister = (CashRegister)this.cashRegisters.stream().filter(c -> c.isReserved());
+        stoppedCashRegister.makeBreak();
+        reservedCashRegister.setQueue(stoppedCashRegister.getQueue());
     }
 }
