@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Station {
     private static Station instance;
-    List<ICashRegister> cashRegisters;
+    List<CashRegister> cashRegisters;
     List<Entrance> entrances;
     IQueueResolver queueResolver;
     int capacity;
@@ -27,7 +27,7 @@ public class Station {
     public boolean isFull(){
         throw new NotImplementedException();
     }
-    public void updateQueues(ICustomer customer){ //appoint customer to the queue
+    public void updateQueues(Customer customer){ //appoint customer to the queue
         queueResolver.appointCustomerToQueue(cashRegisters, customer);
         throw new NotImplementedException();
     }
