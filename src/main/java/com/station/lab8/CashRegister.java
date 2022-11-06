@@ -66,7 +66,15 @@ public class CashRegister implements ICashRegister, Runnable{
     @Override
     public void serve() {
         logger.log(Level.INFO,"serving customer");
-        throw new NotImplementedException();
+        try {
+            Thread.sleep(serviceTime);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addCustomer(Customer customer){
+        this.queue.add(customer);
     }
 
     @Override
