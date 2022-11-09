@@ -31,9 +31,10 @@
                     <children>
                         <TableView prefHeight="200.0" prefWidth="200.0">
                             <columns>
-                                <TableColumn prefWidth="85.20001602172852" text="TicketsCount" />
-                                <TableColumn prefWidth="48.600006103515625" text="Status" />
-                        <TableColumn prefWidth="92.19998168945312" text="Entrance" />
+                        <TableColumn prefWidth="24.199981689453125" text="ID" />
+                                <TableColumn prefWidth="87.80001449584961" text="TicketsCount" />
+                                <TableColumn prefWidth="48.399993896484375" text="Status" />
+                        <TableColumn prefWidth="75.99999084472657" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets />
@@ -41,9 +42,10 @@
                         </TableView>
                         <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <columns>
-                                <TableColumn prefWidth="88.19999998807907" text="TicketsCount" />
-                                <TableColumn prefWidth="46.4000244140625" text="Status" />
-                        <TableColumn prefWidth="91.199951171875" text="Entrance" />
+                        <TableColumn prefWidth="24.199951946735382" text="ID" />
+                                <TableColumn prefWidth="90.99999618530273" text="TicketsCount" />
+                                <TableColumn prefWidth="50.79998779296875" text="Status" />
+                        <TableColumn prefWidth="60.00001525878906" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -51,9 +53,10 @@
                         </TableView>
                         <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <columns>
-                                <TableColumn prefWidth="85.20001602172852" text="TicketsCount" />
-                                <TableColumn prefWidth="50.600006103515625" text="Status" />
-                        <TableColumn prefWidth="90.19998168945312" text="Entrance" />
+                        <TableColumn prefWidth="26.199981689453125" text="ID" />
+                                <TableColumn prefWidth="89.20000839233398" text="TicketsCount" />
+                                <TableColumn prefWidth="44.600006103515625" text="Status" />
+                        <TableColumn prefWidth="76.79997863769532" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets top="10.0" />
@@ -61,9 +64,10 @@
                         </TableView>
                         <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <columns>
-                                <TableColumn prefWidth="87.19999998807907" text="TicketsCount" />
-                                <TableColumn prefWidth="52.199951171875" text="Status" />
-                        <TableColumn prefWidth="86.20001220703125" text="Entrance" />
+                        <TableColumn prefWidth="23.199951946735382" text="ID" />
+                                <TableColumn prefWidth="88.99999618530273" text="TicketsCount" />
+                                <TableColumn prefWidth="48.0" text="Status" />
+                        <TableColumn prefWidth="66.39997863769531" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" top="10.0" />
@@ -71,9 +75,10 @@
                         </TableView>
                         <TableView prefHeight="203.0" prefWidth="199.0" GridPane.columnIndex="2">
                             <columns>
-                                <TableColumn prefWidth="87.19994962215424" text="TicketsCount" />
-                                <TableColumn prefWidth="48.00000762939453" text="Status" />
-                        <TableColumn prefWidth="91.20001220703125" text="Entrance" />
+                        <TableColumn prefWidth="24.20001256465912" text="ID" />
+                                <TableColumn prefWidth="85.40002250671387" text="TicketsCount" />
+                                <TableColumn prefWidth="45.40003204345703" text="Status" />
+                        <TableColumn prefWidth="70.5999755859375" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -81,9 +86,10 @@
                         </TableView>
                         <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <columns>
-                                <TableColumn prefWidth="84.59997403621674" text="TicketsCount" />
-                                <TableColumn prefWidth="52.20001983642578" text="Status" />
-                        <TableColumn prefWidth="90.20001220703125" text="Entrance" />
+                        <TableColumn prefWidth="28.20001256465912" text="ID" />
+                                <TableColumn prefWidth="81.99999809265137" text="TicketsCount" />
+                                <TableColumn prefWidth="47.20001983642578" text="Status" />
+                        <TableColumn prefWidth="67.20001220703125" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" top="10.0" />
