@@ -34,20 +34,10 @@ public class Application extends javafx.application.Application {
         queue.add(new Customer(6,CustomerStatus.REGULAR,null));
 
         List<ICashRegister> cashes = new ArrayList<>();
-        cashes.add(new CashRegister(new PriorityQueue<>(new Comparator<ICustomer>() {
-            public int compare(ICustomer n1, ICustomer n2) {
-                return n1.getStatus().compareTo(n2.getStatus());
-            }
-        }),true,false,new Position(10,0)));
+        cashes.add(new CashRegister(new PriorityQueue<>(),true,false,new Position(10,0)));
 
-        cashes.add(new CashRegister(new PriorityQueue<>(new Comparator<ICustomer>() {
-            public int compare(ICustomer n1, ICustomer n2) {
-                return n1.getStatus().compareTo(n2.getStatus());
-            }
-        }),true,false,new Position(20,5)));
-
-
-
+       // cashes.add(new CashRegister(new PriorityQueue<>(),true,false,new Position(20,5)));
+        cashes.get(0).setServiceTime(1500);
         Station st =  Station.getInstance();
         st.queueResolver = new QueueResolver();
         st.setCashRegisters(cashes);
@@ -58,9 +48,10 @@ public class Application extends javafx.application.Application {
         st.entrances = entrances;
         IThreadGeneratorPeople generatorPeople = new ThreadGeneratorPeople(new IntervalGenerateStrategy(400));
         Thread generatorThread = new Thread(generatorPeople);
+
         generatorThread.start();
-       // cashes.forEach(x->new Thread(x).start());
-        cashes.forEach(x->x.run());
+        cashes.forEach(x->new Thread(x).start());
+
         Timer timer2 = new Timer();
         timer2.schedule(new TimerTask() {
             @Override
