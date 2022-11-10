@@ -29,12 +29,15 @@ public class Customer implements ICustomer{
     }
 
 
+    @Override
     public int getTicketsCount() {
         return ticketsCount;
     }
+    @Override
     public CustomerStatus getStatus() {
         return status;
     }
+    @Override
     public Entrance getEntrance() {
         return entrance;
     }

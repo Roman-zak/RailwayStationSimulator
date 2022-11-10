@@ -5,7 +5,21 @@ import java.util.List;
 
 public class Station {
     private static Station instance;
-    List<CashRegister> cashRegisters;
+
+    public void setCashRegisters(List<ICashRegister> cashRegisters) {
+        this.cashRegisters = cashRegisters;
+    }
+
+    public List<ICashRegister> getCashRegisters() {
+        return cashRegisters;
+    }
+
+    List<ICashRegister> cashRegisters;
+
+    public List<Entrance> getEntrances() {
+        return entrances;
+    }
+
     List<Entrance> entrances;
     IQueueResolver queueResolver;
     int capacity;
@@ -29,7 +43,8 @@ public class Station {
         return currentPeopleCount >= capacity;
     }
     public void updateQueues(Customer customer){
-        queueResolver.appointCustomerToQueue(cashRegisters, customer);
+        queueResolver.getPosition(cashRegisters,customer.getEntrance().getPosition()).addCustomer(customer);
+
     }
     public void useReservedCashRegister(ICashRegister stoppedCashRegister){
         var reservedCashRegister = (CashRegister)this.cashRegisters.stream().filter(c -> c.isReserved());
