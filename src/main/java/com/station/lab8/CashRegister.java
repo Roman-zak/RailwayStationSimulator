@@ -6,32 +6,32 @@ import org.apache.commons.lang3.NotImplementedException;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-public class CashRegister implements ICashRegister, Runnable{
+public class CashRegister implements ICashRegister{
     private static Logger logger = Logger.getLogger(CashRegister.class.getName());
-    private static int serviceTime;
+    private static int serviceTime=1000;
+
+
     private PriorityQueue<ICustomer> queue;
-    private int entrancesCount;
     private boolean serviceable;
     private boolean reserved;
-
     private Position position;
 
     public CashRegister() {
     }
 
-    public CashRegister(PriorityQueue<ICustomer> queue, int entrancesCount, boolean serviceable, boolean reserved, Position position) {
+    public CashRegister(PriorityQueue<ICustomer> queue, boolean serviceable, boolean reserved, Position position) {
         this.queue = queue;
-        this.entrancesCount = entrancesCount;
+
         this.serviceable = serviceable;
         this.reserved = reserved;
         this.position = position;
     }
 
-    public static int getServiceTime() {
+    public  int getServiceTime() {
         return serviceTime;
     }
 
-    public static void setServiceTime(int serviceTime) {
+    public  void setServiceTime(int serviceTime) {
         CashRegister.serviceTime = serviceTime;
     }
 
@@ -41,14 +41,6 @@ public class CashRegister implements ICashRegister, Runnable{
 
     public void setQueue(PriorityQueue<ICustomer> queue) {
         this.queue = queue;
-    }
-
-    public int getEntrancesCount() {
-        return entrancesCount;
-    }
-
-    public void setEntrancesCount(int entrancesCount) {
-        this.entrancesCount = entrancesCount;
     }
 
     public boolean isServiceable() {
@@ -77,13 +69,13 @@ public class CashRegister implements ICashRegister, Runnable{
         }
         this.queue.remove(this.queue.peek());
     }
-
+    @Override
     public void addCustomer(Customer customer){
         this.queue.add(customer);
     }
 
     @Override
-    public void makeBreak() {
+    public synchronized void  makeBreak() {
         this.serviceable = false;
     }
 

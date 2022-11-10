@@ -7,6 +7,9 @@ public class IntervalGenerateStrategy implements Strategy {
         return interval;
     }
 
+    public IntervalGenerateStrategy(int interval){
+        this.interval = interval;
+    }
     public void setInterval(int interval) {
         this.interval = interval;
     }
