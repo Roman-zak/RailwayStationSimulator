@@ -29,7 +29,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <TableView prefHeight="200.0" prefWidth="200.0">
+                        <TableView fx:id="cashRegister1" maxHeight="225.0" prefHeight="228.0" prefWidth="238.0">
                             <columns>
                         <TableColumn prefWidth="24.199981689453125" text="ID" />
                                 <TableColumn prefWidth="87.80001449584961" text="TicketsCount" />
@@ -40,7 +40,7 @@
                         <Insets />
                      </GridPane.margin>
                         </TableView>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <TableView fx:id="cashRegister2" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <columns>
                         <TableColumn prefWidth="24.199951946735382" text="ID" />
                                 <TableColumn prefWidth="90.99999618530273" text="TicketsCount" />
@@ -51,7 +51,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                         </TableView>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                        <TableView fx:id="cashRegister4" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <columns>
                         <TableColumn prefWidth="26.199981689453125" text="ID" />
                                 <TableColumn prefWidth="89.20000839233398" text="TicketsCount" />
@@ -62,7 +62,7 @@
                         <Insets top="10.0" />
                      </GridPane.margin>
                         </TableView>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <TableView fx:id="cashRegister5" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <columns>
                         <TableColumn prefWidth="23.199951946735382" text="ID" />
                                 <TableColumn prefWidth="88.99999618530273" text="TicketsCount" />
@@ -73,7 +73,7 @@
                         <Insets left="10.0" top="10.0" />
                      </GridPane.margin>
                         </TableView>
-                        <TableView prefHeight="203.0" prefWidth="199.0" GridPane.columnIndex="2">
+                        <TableView fx:id="cashRegister3" maxHeight="225.0" prefHeight="203.0" prefWidth="199.0" GridPane.columnIndex="2">
                             <columns>
                         <TableColumn prefWidth="24.20001256465912" text="ID" />
                                 <TableColumn prefWidth="85.40002250671387" text="TicketsCount" />
@@ -84,7 +84,7 @@
                         <Insets left="10.0" />
                      </GridPane.margin>
                         </TableView>
-                        <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <TableView fx:id="cashRegisterSpare" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <columns>
                         <TableColumn prefWidth="28.20001256465912" text="ID" />
                                 <TableColumn prefWidth="81.99999809265137" text="TicketsCount" />
@@ -95,6 +95,35 @@
                         <Insets left="10.0" top="10.0" />
                      </GridPane.margin>
                         </TableView>
+                  <Label fx:id="labelCashRegister1" alignment="CENTER" contentDisplay="CENTER" maxWidth="140.0" text="Cash Register 1: ">
+                     <GridPane.margin>
+                        <Insets bottom="240.0" left="50.0" />
+                     </GridPane.margin></Label>
+                  <Label fx:id="labelCashRegister2" alignment="CENTER" contentDisplay="CENTER" maxWidth="140.0" text="Cash Register 2: " GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="240.0" left="50.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="labelCashRegister3" alignment="CENTER" contentDisplay="CENTER" maxWidth="140.0" text="Cash Register 3:" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="240.0" left="50.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="labelCashRegister4" alignment="CENTER" contentDisplay="CENTER" maxWidth="140.0" text="Cash Register 4:" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="240.0" left="50.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="labelCashRegister5" alignment="CENTER" contentDisplay="CENTER" maxWidth="140.0" text="Cash Register 5:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="240.0" left="50.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="labelCashRegisterSpare" alignment="CENTER" contentDisplay="CENTER" maxWidth="140.0" text="Spare Cash Register:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets bottom="240.0" left="50.0" />
+                     </GridPane.margin>
+                  </Label>
                     </children>
                 </GridPane>
             <GridPane GridPane.columnIndex="1">
