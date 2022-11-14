@@ -228,7 +228,7 @@
                         </TableView>
                         <TableView fx:id="tableEntrances" editable="true" prefHeight="86.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <columns>
-                            <TableColumn fx:id="entrancePositionX" onEditCommit="#handleEntrencePositionX" prefWidth="75.0" text="PositonX" />
+                            <TableColumn fx:id="entrancePositionX" prefWidth="75.0" text="PositonX" />
                             <TableColumn fx:id="entrancePositionY" prefWidth="75.0" text="PositonY" />
                           </columns>
                            <GridPane.margin>
