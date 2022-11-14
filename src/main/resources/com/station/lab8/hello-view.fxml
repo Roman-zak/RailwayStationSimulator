@@ -214,12 +214,12 @@
                            <GridPane.margin>
                               <Insets bottom="20.0" left="60.0" />
                            </GridPane.margin></ComboBox>
-                        <TableView prefHeight="400.0" GridPane.rowIndex="1">
+                        <TableView fx:id="tableCashRegisters" editable="true" prefHeight="400.0" GridPane.rowIndex="1">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="PositonX" />
-                            <TableColumn prefWidth="75.20001220703125" text="PositionY" />
-                              <TableColumn prefWidth="75.20001220703125" text="Serviceable" />
-                              <TableColumn prefWidth="75.0" text="Reserved" />
+                            <TableColumn fx:id="cashRegisterPositionX" editable="true" prefWidth="75.0" text="PositonX"/>
+                            <TableColumn fx:id="cashRegisterPositionY" prefWidth="75.20001220703125" text="PositionY" />
+                              <TableColumn fx:id="cashRegisterServiceable" prefWidth="75.20001220703125" text="Serviceable" />
+                              <TableColumn fx:id="cashRegisterReserved" prefWidth="75.0" text="Reserved" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -227,7 +227,7 @@
                         </TableView>
                         <TableView fx:id="tableEntrances" prefHeight="86.0" prefWidth="190.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <columns>
-                            <TableColumn fx:id="entrancePositionX" prefWidth="75.0" text="PositonX" />
+                            <TableColumn fx:id="entrancePositionX" onEditCommit="#handleEntrencePositionX" prefWidth="75.0" text="PositonX" />
                             <TableColumn fx:id="entrancePositionY" prefWidth="75.0" text="PositonY" />
                           </columns>
                            <GridPane.margin>

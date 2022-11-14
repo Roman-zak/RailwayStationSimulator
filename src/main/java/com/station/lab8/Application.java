@@ -13,12 +13,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class Application extends javafx.application.Application {
-    private TableView<Position> table = new TableView<Position>();
-    private final ObservableList<Position> data =
-            FXCollections.observableArrayList(
-                    new Position(0, 0),
-                    new Position(1, 2)
-            );
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -26,18 +20,6 @@ public class Application extends javafx.application.Application {
         Scene scene = new Scene(fxmlLoader.load(), 1350, 550);
         stage.setTitle("Lab08!");
         stage.setScene(scene);
-        table.setEditable(true);
-
-        TableColumn posX = new TableColumn("PositionX");
-        posX.setCellValueFactory(new PropertyValueFactory<Entrance,String>("_positionX"));
-
-        TableColumn posY = new TableColumn("PositionY");
-        posY.setCellValueFactory(
-                new PropertyValueFactory<Entrance,String>("_positionY")
-        );
-
-        table.setItems(data);
-        table.getColumns().addAll(posX, posY);
 
         stage.show();
     }

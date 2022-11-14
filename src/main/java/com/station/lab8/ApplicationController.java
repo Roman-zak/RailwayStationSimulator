@@ -1,11 +1,17 @@
 package com.station.lab8;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+
+import javax.security.auth.callback.Callback;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,6 +35,11 @@ public class ApplicationController implements Initializable {
     @FXML TextField maxServiceTime;
     @FXML TextField cashRegisterDisconnection;
     @FXML TableView<EntranceWrapper> tableEntrances;
+    @FXML TableView<CashRegisterWrapper> tableCashRegisters;
+    @FXML TableColumn<CashRegisterWrapper, String> cashRegisterPositionX;
+    @FXML TableColumn<CashRegisterWrapper, String> cashRegisterPositionY;
+    @FXML TableColumn<CashRegisterWrapper, Boolean> cashRegisterReserved;
+    @FXML TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
     @FXML TableColumn<EntranceWrapper, String> entrancePositionX;
     @FXML TableColumn<EntranceWrapper, String> entrancePositionY;
 
@@ -38,20 +49,89 @@ public class ApplicationController implements Initializable {
             new EntranceWrapper("1","2")
     );
 
+    ObservableList<CashRegisterWrapper> cashRegisters = FXCollections.observableArrayList(
+            new CashRegisterWrapper("0", "0", true, true),
+            new CashRegisterWrapper("1", "1", false, false)
+    );
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         entrancePositionX.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posX"));
         entrancePositionY.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posY"));
         tableEntrances.setItems(entrances);
 
+        cashRegisterPositionX.setEditable(true);
+        cashRegisterPositionX.setCellFactory(TextFieldTableCell.forTableColumn());
+        cashRegisterPositionX.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
+                        ((CashRegisterWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setPosX(t.getNewValue());
+                    }
+                }
+        );
+
+        cashRegisterPositionY.setEditable(true);
+        cashRegisterPositionY.setCellFactory(TextFieldTableCell.forTableColumn());
+        cashRegisterPositionY.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
+                        ((CashRegisterWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setPosY(t.getNewValue());
+                    }
+                }
+        );
+
+        cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
+        cashRegisterReserved.setCellFactory(tc -> new CheckBoxTableCell<>());
+        cashRegisterReserved.setEditable(true);
+        cashRegisterReserved.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                        ((CashRegisterWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setIsReserved(t.getNewValue());
+                    }
+                }
+        );
+
+        cashRegisterServiceable.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsServiceable()));
+        cashRegisterServiceable.setCellFactory(tc -> new CheckBoxTableCell<>());
+        cashRegisterServiceable.setEditable(true);
+        cashRegisterServiceable.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                        ((CashRegisterWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setIsServiceable(t.getNewValue());
+                    }
+                }
+        );
+
+        cashRegisterPositionX.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posX"));
+        cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
+        cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
+        cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
+
+
+
+        tableCashRegisters.setItems(cashRegisters);
+
         countOfCashRegisters.setItems(valueOfComboBox);
         countOfEntrances.setItems(valueOfComboBox);
     }
 
+
+
     public void handleChangeCountOfEntrances(ActionEvent event){
         //need change count of rows in table with cash registers
         EntranceWrapper entrance = new EntranceWrapper("10", "14");
-        //tableEntrances.getItems().add(entrance);
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("You picked " +  countOfEntrances.getValue());
@@ -103,4 +183,11 @@ public class ApplicationController implements Initializable {
         alert.setContentText("You want disconnect cash register number  " +  cashRegisterDisconnection.getText());
         alert.showAndWait();
     }
+
+    public void handleEntrencePositionX(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("You want disconnect cash register number  " +  cashRegisterDisconnection.getText());
+        alert.showAndWait();
+    }
+
 }
