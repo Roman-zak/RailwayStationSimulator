@@ -33,8 +33,10 @@ public class Customer implements ICustomer {
         this.entrance = entrance;
 
         countTickets.set(ticketsCount);
-        posX.set(entrance.getPosition().getX());
-        posY.set(entrance.getPosition().getY());
+        if (entrance != null) {
+            posX.set(entrance.getPosition().getX());
+            posY.set(entrance.getPosition().getY());
+        }
     }
 
     public Integer getPosX() {
@@ -67,8 +69,10 @@ public class Customer implements ICustomer {
     @Override
     public void setEntrance(Entrance entrance) {
         this.entrance = entrance;
-        posX.set(entrance.getPosition().getX());
-        posY.set(entrance.getPosition().getY());
+        if (entrance != null) {
+            posX.set(entrance.getPosition().getX());
+            posY.set(entrance.getPosition().getY());
+        }
     }
 
 
