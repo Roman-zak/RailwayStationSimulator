@@ -33,12 +33,15 @@ public class ApplicationController implements Initializable {
     @FXML TableColumn<EntranceWrapper, String> entrancePositionY;
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
-    ObservableList<EntranceWrapper> entrances = FXCollections.observableArrayList();
+    ObservableList<EntranceWrapper> entrances = FXCollections.observableArrayList(
+            new EntranceWrapper("0","0"),
+            new EntranceWrapper("1","2")
+    );
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        entrancePositionX.setCellValueFactory(new PropertyValueFactory<>("positionX"));
-        entrancePositionY.setCellValueFactory(new PropertyValueFactory<>("positionY"));
+        entrancePositionX.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posX"));
+        entrancePositionY.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posY"));
         tableEntrances.setItems(entrances);
 
         countOfCashRegisters.setItems(valueOfComboBox);
@@ -56,10 +59,7 @@ public class ApplicationController implements Initializable {
     }
 
     public void handleChangeCountOfCashRegisters(ActionEvent event){
-        //need change count of rows in table with cash registers
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("You picked " +  countOfCashRegisters.getValue());
-        alert.showAndWait();
+        //need change count of rows in table with cash register
 
         Integer count = countOfCashRegisters.getValue();
         
@@ -90,8 +90,8 @@ public class ApplicationController implements Initializable {
             this.cashRegister2.setVisible(false);
             this.labelCashRegister2.setVisible(false);
         }
-        this.cashRegisterSpare.setVisible(false);
-        this.labelCashRegisterSpare.setVisible(false);
+//        this.cashRegisterSpare.setVisible(false);
+//        this.labelCashRegisterSpare.setVisible(false);
     }
 
     public void handleStart(ActionEvent event){
