@@ -52,7 +52,17 @@ public class Customer implements ICustomer{
 
     @Override
     public int compareTo(Object o) {
-        return status.compareTo(((Customer)o).getStatus());
+        var cust = (Customer)o;
+        int status1 = (status.equals(CustomerStatus.REGULAR))?1:0;
+        int status2 =cust.status.equals(CustomerStatus.REGULAR)?1:0;
+        if(status1==status2)
+            return id>cust.id?1:-1;
+        return  status1>status2?1:-1;
 
+    }
+
+    @Override
+    public String toString() {
+        return status.toString()+" "+status.ordinal()+" "+ticketsCount+" "+id;
     }
 }

@@ -19,13 +19,7 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) throws InterruptedException {
         launch();
-        PriorityQueue<ICustomer> queue = new PriorityQueue<>(new Comparator<ICustomer>() {
-            public int compare(ICustomer n1, ICustomer n2) {
-
-
-               return n1.getStatus().compareTo(n2.getStatus());
-            }
-        });
+        PriorityQueue<ICustomer> queue = new PriorityQueue<>();
         queue.add(new Customer(1,CustomerStatus.DISABLED,null));
         queue.add(new Customer(2,CustomerStatus.REGULAR,null));
         queue.add(new Customer(3,CustomerStatus.ELDERLY,null));
@@ -33,6 +27,17 @@ public class Application extends javafx.application.Application {
         queue.add(new Customer(5,CustomerStatus.WITH_CHILD,null));
         queue.add(new Customer(6,CustomerStatus.REGULAR,null));
 
+
+        Iterator iterator = queue.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next() + " ");
+        }
+        System.out.println();
+        ICustomer val2 = null;
+        while( (val2 = queue.poll()) != null) {
+            System.out.println(val2);
+        }
         List<ICashRegister> cashes = new ArrayList<>();
         cashes.add(new CashRegister(new PriorityQueue<>(),true,false,new Position(10,0)));
 
@@ -50,18 +55,9 @@ public class Application extends javafx.application.Application {
         Thread generatorThread = new Thread(generatorPeople);
 
         generatorThread.start();
-        cashes.forEach(x->new Thread(x).start());
+      //  cashes.forEach(x->new Thread(x).start());
 
-        Timer timer2 = new Timer();
-        timer2.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("Cashes");
-                st.getCashRegisters().forEach(x->System.out.println(x.getQueue().size()));
-                System.out.println("end Cashes");
 
-            }
-        }, 0,1000);
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -70,20 +66,21 @@ public class Application extends javafx.application.Application {
                 timer.cancel();timer.purge();
 
             }
-        }, 15000);
+        }, 10000);
 
 
         Thread.sleep(20000);
         var stCashes=st.getCashRegisters();
+        ICustomer val;
         for(var c: stCashes){
             System.out.println(c.getPosition().getX()+" "+c.getPosition().getY());
-            ICustomer val = null;
+            val = null;
             while( (val = c.getQueue().poll()) != null) {
-                System.out.println(val.getStatus()+" "+val.getStatus().ordinal()+" "+val.getTicketsCount());
+                System.out.println(val.getStatus()+" "+val.getStatus().ordinal()+" "+val.getTicketsCount()+" "+val.getId());
             }
         }
         st.getCashRegisters().forEach(c->c.makeBreak());
-        timer2.cancel();timer2.purge();
+
         System.out.println("The min Priority Queue (natural ordering) contents:");
 
 

@@ -7,5 +7,5 @@ public interface ICustomer extends Comparable {
     int getTicketsCount();
     public CustomerStatus getStatus();
     public Entrance getEntrance();
-      int getId();
+    int getId();
 }
