@@ -10,8 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-
-import javax.security.auth.callback.Callback;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -42,8 +40,10 @@ public class ApplicationController implements Initializable {
     @FXML TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
     @FXML TableColumn<EntranceWrapper, String> entrancePositionX;
     @FXML TableColumn<EntranceWrapper, String> entrancePositionY;
+    @FXML ComboBox<Integer> countOfDisconnect;
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
+    ObservableList<Integer> valueOfDisconnect = FXCollections.observableArrayList();
     ObservableList<EntranceWrapper> entrances = FXCollections.observableArrayList(
             new EntranceWrapper("0","0"),
             new EntranceWrapper("1","2")
@@ -57,7 +57,29 @@ public class ApplicationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         entrancePositionX.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posX"));
+        entrancePositionX.setCellFactory(TextFieldTableCell.forTableColumn());
+        entrancePositionX.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<EntranceWrapper, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<EntranceWrapper, String> t) {
+                        ((EntranceWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setPosX(t.getNewValue());
+                    }
+                }
+        );
         entrancePositionY.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posY"));
+        entrancePositionY.setCellFactory(TextFieldTableCell.forTableColumn());
+        entrancePositionY.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<EntranceWrapper, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<EntranceWrapper, String> t) {
+                        ((EntranceWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setPosY(t.getNewValue());
+                    }
+                }
+        );
         tableEntrances.setItems(entrances);
 
         cashRegisterPositionX.setEditable(true);
@@ -125,17 +147,19 @@ public class ApplicationController implements Initializable {
 
         countOfCashRegisters.setItems(valueOfComboBox);
         countOfEntrances.setItems(valueOfComboBox);
+        countOfDisconnect.setItems(valueOfDisconnect);
     }
 
+    public void handleChangeCountOfEntrances(ActionEvent event) {
+        while (entrances.size() < countOfEntrances.getValue()) {
+            entrances.add(new EntranceWrapper("0", "0"));
+        }
+
+        while (entrances.size() > countOfEntrances.getValue()) {
+            entrances.remove(entrances.size() - 1);
+        }
 
 
-    public void handleChangeCountOfEntrances(ActionEvent event){
-        //need change count of rows in table with cash registers
-        EntranceWrapper entrance = new EntranceWrapper("10", "14");
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("You picked " +  countOfEntrances.getValue());
-        alert.showAndWait();
     }
 
     public void handleChangeCountOfCashRegisters(ActionEvent event){
@@ -170,6 +194,17 @@ public class ApplicationController implements Initializable {
             this.cashRegister2.setVisible(false);
             this.labelCashRegister2.setVisible(false);
         }
+
+        while (valueOfDisconnect.size() < count) {
+            valueOfDisconnect.add(valueOfDisconnect.size() + 1);
+        }
+
+        while (valueOfDisconnect.size() > count) {
+            valueOfDisconnect.remove(valueOfDisconnect.size() - 1);
+        }
+
+        countOfDisconnect.setItems(valueOfDisconnect);
+
 //        this.cashRegisterSpare.setVisible(false);
 //        this.labelCashRegisterSpare.setVisible(false);
     }
@@ -183,11 +218,4 @@ public class ApplicationController implements Initializable {
         alert.setContentText("You want disconnect cash register number  " +  cashRegisterDisconnection.getText());
         alert.showAndWait();
     }
-
-    public void handleEntrencePositionX(ActionEvent event){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("You want disconnect cash register number  " +  cashRegisterDisconnection.getText());
-        alert.showAndWait();
-    }
-
 }
