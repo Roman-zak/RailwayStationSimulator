@@ -184,12 +184,6 @@ public class ApplicationController implements Initializable {
         this.cashRegisterSpareEntrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
         this.cashRegisterSpare.setItems(this.customersCashRegisterSpare);
 
-        this.customersCashRegister1.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
-        this.customersCashRegister2.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
-        this.customersCashRegister3.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
-        this.customersCashRegister4.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
-        this.customersCashRegister5.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
-
         entrancePositionX.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posX"));
         entrancePositionX.setCellFactory(TextFieldTableCell.forTableColumn());
         entrancePositionX.setOnEditCommit(
