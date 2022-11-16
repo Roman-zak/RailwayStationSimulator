@@ -177,9 +177,9 @@
                               </Label>
                            </children>
                         </GridPane>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleStart" prefHeight="26.0" prefWidth="138.0" text="Start" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleStart" prefHeight="26.0" prefWidth="100.0" text="Start" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
-                              <Insets />
+                              <Insets left="125.0" />
                            </GridPane.margin></Button>
                         <Button mnemonicParsing="false" onAction="#handleDisconnectCashRegister" prefHeight="26.0" prefWidth="138.0" text="Disable Cash Register" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <GridPane.margin>
@@ -195,6 +195,11 @@
                               <Insets top="20.0" />
                            </GridPane.margin>
                         </ComboBox>
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Button" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="30.0" />
+                           </GridPane.margin>
+                        </Button>
                      </children>
                   </GridPane>
                   <GridPane prefHeight="122.0" prefWidth="552.0">
@@ -217,7 +222,7 @@
                            </GridPane.margin></ComboBox>
                         <TableView fx:id="tableCashRegisters" editable="true" prefHeight="400.0" GridPane.rowIndex="1">
                           <columns>
-                            <TableColumn fx:id="cashRegisterPositionX" editable="true" prefWidth="75.0" text="PositonX"/>
+                            <TableColumn fx:id="cashRegisterPositionX" editable="true" prefWidth="75.0" text="PositonX" />
                             <TableColumn fx:id="cashRegisterPositionY" prefWidth="75.20001220703125" text="PositionY" />
                               <TableColumn fx:id="cashRegisterServiceable" prefWidth="75.20001220703125" text="Serviceable" />
                               <TableColumn fx:id="cashRegisterReserved" prefWidth="75.0" text="Reserved" />
