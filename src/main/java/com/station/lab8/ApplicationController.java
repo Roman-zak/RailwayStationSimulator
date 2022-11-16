@@ -24,21 +24,68 @@ public class ApplicationController implements Initializable {
     @FXML
     TableView<CustomerWrapper> cashRegister1;
     @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister1Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister1Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister1Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister1Entrance;
+    @FXML
     TableView<CustomerWrapper> cashRegister2;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister2Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister2Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister2Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister2Entrance;
     @FXML
     TableView<CustomerWrapper> cashRegister3;
     @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister3Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister3Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister3Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister3Entrance;
+    @FXML
     TableView<CustomerWrapper> cashRegister4;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister4Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister4Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister4Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister4Entrance;
     @FXML
     TableView<CustomerWrapper> cashRegister5;
     @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister5Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister5Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister5Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister5Entrance;
+    @FXML
     TableView<CustomerWrapper> cashRegisterSpare;
     @FXML
+    TableView<LogWrapper> logView;
+    @FXML
     Label labelCashRegister1;
+    TableColumn<CustomerWrapper, Integer> cashRegisterSpareId;
     @FXML
-    Label labelCashRegister2;
+    TableColumn<CustomerWrapper, Integer> cashRegisterSpareTickets;
     @FXML
-    Label labelCashRegister3;
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegisterSpareStatus;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegisterSpareEntrance;
+    @FXML Label labelCashRegister2;
+    @FXML Label labelCashRegister3;
     @FXML
     Label labelCashRegister4;
     @FXML
@@ -68,10 +115,21 @@ public class ApplicationController implements Initializable {
     @FXML
     TableColumn<EntranceWrapper, String> entrancePositionY;
     @FXML
+    TableColumn<LogWrapper, Integer> loggerViewId;
+    @FXML
+    TableColumn<LogWrapper, String> loggerViewText;
+    @FXML
     ComboBox<Integer> countOfDisconnect;
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
     ObservableList<Integer> valueOfDisconnect = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister1 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister2 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister3 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister4 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister5 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegisterSpare = FXCollections.observableArrayList();
+
     ObservableList<EntranceWrapper> entrances = FXCollections.observableArrayList(
             new EntranceWrapper("0", "0"),
             new EntranceWrapper("1", "2")
@@ -82,7 +140,7 @@ public class ApplicationController implements Initializable {
             new CashRegisterWrapper("1", "1", false, false)
     );
 
-
+    ObservableList<LogWrapper> valueOfLogger = FXCollections.observableArrayList();
     //
     Station station;
     ThreadGeneratorPeople generatorPeople;
@@ -113,6 +171,9 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
+        loggerViewId.setCellValueFactory(new PropertyValueFactory<LogWrapper, Integer>("id"));
+        loggerViewText.setCellValueFactory(new PropertyValueFactory<LogWrapper, String>("text"));
+
         tableEntrances.setItems(entrances);
 
         cashRegisterPositionX.setEditable(true);
@@ -175,12 +236,12 @@ public class ApplicationController implements Initializable {
         cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
 
 
-
         tableCashRegisters.setItems(cashRegisters);
 
         countOfCashRegisters.setItems(valueOfComboBox);
         countOfEntrances.setItems(valueOfComboBox);
         countOfDisconnect.setItems(valueOfDisconnect);
+
     }
 
     public void handleChangeCountOfEntrances(ActionEvent event) {
@@ -196,8 +257,7 @@ public class ApplicationController implements Initializable {
     }
 
 
-
-    public void handleChangeCountOfCashRegisters(ActionEvent event){
+    public void handleChangeCountOfCashRegisters(ActionEvent event) {
         //need change count of rows in table with cash register
 
         int count = countOfCashRegisters.getValue();
@@ -256,7 +316,7 @@ public class ApplicationController implements Initializable {
 //        this.labelCashRegisterSpare.setVisible(false);
     }
 
-    public void handleStart(ActionEvent event){
+    public void handleStart(ActionEvent event) {
         int countCash = countOfCashRegisters.getValue();
         int countEntrance = countOfEntrances.getValue();
         List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);

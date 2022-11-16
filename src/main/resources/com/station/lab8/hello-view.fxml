@@ -31,10 +31,10 @@
                     <children>
                         <TableView fx:id="cashRegister1" maxHeight="225.0" prefHeight="228.0" prefWidth="238.0">
                             <columns>
-                        <TableColumn prefWidth="24.199981689453125" text="ID" />
-                                <TableColumn prefWidth="87.80001449584961" text="TicketsCount" />
-                                <TableColumn prefWidth="48.399993896484375" text="Status" />
-                        <TableColumn prefWidth="75.99999084472657" text="Entrance" />
+                        <TableColumn fx:id="cashRegister1Id" prefWidth="24.199981689453125" text="ID" />
+                                <TableColumn fx:id="cashRegister1Tickets" prefWidth="45.0" text="Tickets" />
+                                <TableColumn fx:id="cashRegister1Status" prefWidth="102.0" text="Status" />
+                        <TableColumn fx:id="cashRegister1Entrance" prefWidth="66.0" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets />
@@ -42,10 +42,10 @@
                         </TableView>
                         <TableView fx:id="cashRegister2" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <columns>
-                        <TableColumn prefWidth="24.199951946735382" text="ID" />
-                                <TableColumn prefWidth="90.99999618530273" text="TicketsCount" />
-                                <TableColumn prefWidth="50.79998779296875" text="Status" />
-                        <TableColumn prefWidth="60.00001525878906" text="Entrance" />
+                        <TableColumn fx:id="cashRegister2Id" prefWidth="24.199951946735382" text="ID" />
+                                <TableColumn fx:id="cashRegister2Tickets" prefWidth="47.19997787475586" text="Tickets" />
+                                <TableColumn fx:id="cashRegister2Status" prefWidth="95.20001220703125" text="Status" />
+                        <TableColumn fx:id="cashRegister2Entrance" prefWidth="60.00001525878906" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -53,10 +53,10 @@
                         </TableView>
                         <TableView fx:id="cashRegister4" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <columns>
-                        <TableColumn prefWidth="26.199981689453125" text="ID" />
-                                <TableColumn prefWidth="89.20000839233398" text="TicketsCount" />
-                                <TableColumn prefWidth="44.600006103515625" text="Status" />
-                        <TableColumn prefWidth="76.79997863769532" text="Entrance" />
+                        <TableColumn fx:id="cashRegister4Id" prefWidth="26.199981689453125" text="ID" />
+                                <TableColumn fx:id="cashRegister4Tickets" prefWidth="46.80000305175781" text="Tickets" />
+                                <TableColumn fx:id="cashRegister4Status" prefWidth="97.80001831054688" text="Status" />
+                        <TableColumn fx:id="cashRegister4Entrance" prefWidth="67.79998779296875" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets top="10.0" />
@@ -64,10 +64,10 @@
                         </TableView>
                         <TableView fx:id="cashRegister5" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <columns>
-                        <TableColumn prefWidth="23.199951946735382" text="ID" />
-                                <TableColumn prefWidth="88.99999618530273" text="TicketsCount" />
-                                <TableColumn prefWidth="48.0" text="Status" />
-                        <TableColumn prefWidth="66.39997863769531" text="Entrance" />
+                        <TableColumn fx:id="cashRegister5Id" prefWidth="23.199951946735382" text="ID" />
+                                <TableColumn fx:id="cashRegister5Tickets" prefWidth="45.600032806396484" text="Tickets" />
+                                <TableColumn fx:id="cashRegister5Status" prefWidth="97.0" text="Status" />
+                        <TableColumn fx:id="cashRegister5Entrance" prefWidth="61.39996337890625" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" top="10.0" />
@@ -75,10 +75,10 @@
                         </TableView>
                         <TableView fx:id="cashRegister3" maxHeight="225.0" prefHeight="203.0" prefWidth="199.0" GridPane.columnIndex="2">
                             <columns>
-                        <TableColumn prefWidth="24.20001256465912" text="ID" />
-                                <TableColumn prefWidth="85.40002250671387" text="TicketsCount" />
-                                <TableColumn prefWidth="45.40003204345703" text="Status" />
-                        <TableColumn prefWidth="70.5999755859375" text="Entrance" />
+                        <TableColumn fx:id="cashRegister3Id" prefWidth="24.20001256465912" text="ID" />
+                                <TableColumn fx:id="cashRegister3Tickets" prefWidth="45.59997367858887" text="Tickets" />
+                                <TableColumn fx:id="cashRegister3Status" prefWidth="95.40003204345703" text="Status" />
+                        <TableColumn fx:id="cashRegister3Entrance" prefWidth="62.20001220703125" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" />
@@ -86,10 +86,10 @@
                         </TableView>
                         <TableView fx:id="cashRegisterSpare" maxHeight="225.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                             <columns>
-                        <TableColumn prefWidth="28.20001256465912" text="ID" />
-                                <TableColumn prefWidth="81.99999809265137" text="TicketsCount" />
-                                <TableColumn prefWidth="47.20001983642578" text="Status" />
-                        <TableColumn prefWidth="67.20001220703125" text="Entrance" />
+                        <TableColumn fx:id="cashRegisterSpareId" prefWidth="28.20001256465912" text="ID" />
+                                <TableColumn fx:id="cashRegisterSpareTickets" prefWidth="49.99999809265137" text="Tickets" />
+                                <TableColumn fx:id="cashRegisterSpareStatus" prefWidth="89.59998321533203" text="Status" />
+                        <TableColumn fx:id="cashRegisterSpareEntrance" prefWidth="60.0" text="Entrance" />
                             </columns>
                      <GridPane.margin>
                         <Insets left="10.0" top="10.0" />
@@ -267,10 +267,10 @@
                         </TableView>
                      </children>
                   </GridPane>
-                  <TableView prefHeight="52.0" prefWidth="232.0" GridPane.rowIndex="2">
+                  <TableView fx:id="logView" prefHeight="52.0" prefWidth="232.0" GridPane.rowIndex="2">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="LogNumber" />
-                      <TableColumn prefWidth="503.2000152587891" text="Text" />
+                      <TableColumn fx:id="loggerViewId" prefWidth="75.0" text="Id" />
+                      <TableColumn fx:id="loggerViewText" prefWidth="503.2000152587891" text="Text" />
                     </columns>
                   </TableView>
                </children>
