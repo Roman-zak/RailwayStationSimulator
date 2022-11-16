@@ -1,6 +1,7 @@
 package com.station.lab8;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -142,6 +143,7 @@ public class ApplicationController implements Initializable {
                 }
         );
 
+
         cashRegisterPositionX.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posX"));
         cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
         cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
@@ -168,11 +170,29 @@ public class ApplicationController implements Initializable {
 
     }
 
+
+
     public void handleChangeCountOfCashRegisters(ActionEvent event){
         //need change count of rows in table with cash register
 
-        Integer count = countOfCashRegisters.getValue();
-        
+        int count = countOfCashRegisters.getValue();
+
+        int curCount = cashRegisters.size();
+        if(count>curCount){
+            for( int i=curCount;i< count;++i){
+                cashRegisters.add(new CashRegisterWrapper(String.format("%d",i),String.format("%d",i),false,true));
+            }
+        }else{
+           while(curCount>count){
+               cashRegisters.remove(count);
+               curCount--;
+           }
+        }
+
+
+
+
+
         this.cashRegister1.setVisible(true);
         this.cashRegister2.setVisible(true);
         this.cashRegister3.setVisible(true);
