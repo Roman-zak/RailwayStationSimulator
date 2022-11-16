@@ -11,6 +11,7 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -53,6 +54,11 @@ public class ApplicationController implements Initializable {
             new CashRegisterWrapper("0", "0", true, true),
             new CashRegisterWrapper("1", "1", false, false)
     );
+
+
+    //
+    Station station;
+    ThreadGeneratorPeople generatorPeople;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -210,9 +216,41 @@ public class ApplicationController implements Initializable {
     }
 
     public void handleStart(ActionEvent event){
+        int countCash = countOfCashRegisters.getValue();
+        int countEntrance = countOfEntrances.getValue();
+        List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);
+        //get real data from table
+        //for now
+        for(int i=0;i<countCash;++i){
+            cashes.add(new CashRegister(new Position(i,i)));
+        }
+
+        var entrances = new ArrayList<Entrance>(countEntrance);
+        //get real data from table
+        //for now
+        for(int i=0;i<countCash;++i){
+            entrances.add(new Entrance(new Position(i,i)));
+        }
+
+        // should be get from ui
+        var capacity = 30;
+        station = new Station(entrances,cashes, new QueueResolver(),capacity);
+
+        //need add component for choosing strategy and input the interval;
+        var generationStrategy = new IntervalGenerateStrategy(200);
+        generatorPeople = new ThreadGeneratorPeople(generationStrategy,station,70);
+
+        new Thread(generatorPeople).start();
+        station.startWork();
+        //add one button for stoping work
         //start of spawn customers
     }
 
+    //function for stop working
+    public void handleStop(ActionEvent event){
+        station.endWork();
+        generatorPeople.stopGeneration();
+    }
     public void handleDisconnectCashRegister(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("You want disconnect cash register number  " +  cashRegisterDisconnection.getText());

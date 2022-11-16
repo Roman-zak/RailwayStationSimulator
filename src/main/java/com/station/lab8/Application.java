@@ -26,6 +26,8 @@ public class Application extends javafx.application.Application {
 
     public static void main(String[] args) throws InterruptedException {
         launch();
+
+        /*
         PriorityQueue<ICustomer> queue = new PriorityQueue<>();
         queue.add(new Customer(1, CustomerStatus.DISABLED, null));
         queue.add(new Customer(2, CustomerStatus.REGULAR, null));
@@ -91,6 +93,6 @@ public class Application extends javafx.application.Application {
 
         System.out.println("The min Priority Queue (natural ordering) contents:");
 
-
+*/
     }
 }

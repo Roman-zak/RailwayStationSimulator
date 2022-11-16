@@ -18,6 +18,9 @@ public class CashRegister implements ICashRegister{
 
     public CashRegister() {
     }
+    public  CashRegister(Position position){
+        this(new PriorityQueue<>(),true, false,position);
+    }
 
     public CashRegister(PriorityQueue<ICustomer> queue, boolean serviceable, boolean reserved, Position position) {
         this.queue = queue;
@@ -46,7 +49,7 @@ public class CashRegister implements ICashRegister{
     public boolean isServiceable() {
         return serviceable;
     }
-
+    @Override
     public void setServiceable(boolean serviceable) {
         this.serviceable = serviceable;
     }
@@ -67,7 +70,7 @@ public class CashRegister implements ICashRegister{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        this.queue.remove(this.queue.peek());
+        this.queue.poll();
     }
     @Override
     public void addCustomer(Customer customer){

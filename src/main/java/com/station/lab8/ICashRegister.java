@@ -12,4 +12,5 @@ public interface ICashRegister extends Runnable {
     void addCustomer(Customer customer);
     void setServiceTime(int time);
     int getServiceTime();
+    void setServiceable(boolean serviceable);
 }
