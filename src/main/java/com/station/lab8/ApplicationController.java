@@ -77,6 +77,7 @@ public class ApplicationController implements Initializable {
     TableView<LogWrapper> logView;
     @FXML
     Label labelCashRegister1;
+    @FXML
     TableColumn<CustomerWrapper, Integer> cashRegisterSpareId;
     @FXML
     TableColumn<CustomerWrapper, Integer> cashRegisterSpareTickets;
@@ -147,6 +148,48 @@ public class ApplicationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.cashRegister1Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister1Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister1Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister1Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister1.setItems(this.customersCashRegister1);
+
+        this.cashRegister2Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister2Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister2Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister2Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister2.setItems(this.customersCashRegister2);
+
+        this.cashRegister3Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister3Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister3Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister3Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister3.setItems(this.customersCashRegister3);
+
+        this.cashRegister4Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister4Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister4Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister4Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister4.setItems(this.customersCashRegister4);
+
+        this.cashRegister5Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister5Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister5Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister5Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister5.setItems(this.customersCashRegister5);
+
+        this.cashRegisterSpareId.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegisterSpareTickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegisterSpareStatus.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegisterSpareEntrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegisterSpare.setItems(this.customersCashRegisterSpare);
+
+        this.customersCashRegister1.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
+        this.customersCashRegister2.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
+        this.customersCashRegister3.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
+        this.customersCashRegister4.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
+        this.customersCashRegister5.add(new CustomerWrapper(1,2,CustomerStatus.WITH_CHILD, "1"));
+
         entrancePositionX.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posX"));
         entrancePositionX.setCellFactory(TextFieldTableCell.forTableColumn());
         entrancePositionX.setOnEditCommit(
