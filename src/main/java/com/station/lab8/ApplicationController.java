@@ -84,7 +84,6 @@ public class ApplicationController implements Initializable {
     TableColumn<CustomerWrapper, CustomerStatus> cashRegisterSpareStatus;
     @FXML
     TableColumn<CustomerWrapper, String> cashRegisterSpareEntrance;
-    @FXML Label labelCashRegister1;
     @FXML Label labelCashRegister2;
     @FXML Label labelCashRegister3;
     @FXML
