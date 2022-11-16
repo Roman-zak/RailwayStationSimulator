@@ -3,13 +3,16 @@ package com.station.lab8;
 import javafx.geometry.Pos;
 import org.apache.commons.lang3.NotImplementedException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class CashRegister implements ICashRegister{
-    private static Logger logger = Logger.getLogger(CashRegister.class.getName());
+
     private static int serviceTime=1000;
 
+    public static List<ILogger> loggers = new ArrayList<>();
 
     private PriorityQueue<ICustomer> queue;
     private boolean serviceable;
@@ -62,9 +65,14 @@ public class CashRegister implements ICashRegister{
         this.reserved = reserved;
     }
 
+    public static void setLoggers(ArrayList<ILogger> logs){loggers = logs;}
     @Override
     public void serve() {
-        logger.log(Level.INFO,"serving customer");
+
+        var custToRemove = this.queue.peek();
+        loggers.forEach(l->l.log(String.format("%d Served by station with position x:%d y%d: give %d tickets"
+                ,custToRemove.getId(), custToRemove.getEntrance().getPosition().getX(),
+                custToRemove.getEntrance().getPosition().getY(), custToRemove.getTicketsCount())));
         try {
             Thread.sleep(serviceTime);
         } catch (InterruptedException e) {

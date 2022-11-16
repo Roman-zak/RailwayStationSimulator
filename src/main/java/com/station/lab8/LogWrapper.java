@@ -7,7 +7,7 @@ public class LogWrapper {
     private final SimpleIntegerProperty number;
     private final SimpleStringProperty text;
 
-    LogWrapper() {
+    private LogWrapper() {
         this.number = new SimpleIntegerProperty();
         this.text = new SimpleStringProperty();
     }

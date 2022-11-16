@@ -1,8 +1,11 @@
 package com.station.lab8;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public interface ICashRegister extends Runnable {
+
     void serve();
     void makeBreak();
     boolean isServiceable();
@@ -13,4 +16,5 @@ public interface ICashRegister extends Runnable {
     void setServiceTime(int time);
     int getServiceTime();
     void setServiceable(boolean serviceable);
+
 }
