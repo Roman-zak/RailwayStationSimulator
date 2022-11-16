@@ -76,6 +76,8 @@ public class Station {
         var reservedCashRegister = (CashRegister)this.cashRegisters.stream().filter(c -> c.isReserved());
         stoppedCashRegister.makeBreak();
         reservedCashRegister.setQueue(stoppedCashRegister.getQueue());
+        reservedCashRegister.setServiceable(true);
+        new Thread(reservedCashRegister).start();
     }
 
     public void startWork(){

@@ -16,6 +16,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class ApplicationController implements Initializable {
@@ -379,18 +380,36 @@ public class ApplicationController implements Initializable {
                     Integer.parseInt(entrances.get(i).positionY))));
         }
 
+        //add rservedCashes
+
+        cashes.add(new CashRegister(new Position(5,5),false,true));
         // should be get from ui
         var capacity = 30;
         station = new Station(entran, cashes, new QueueResolver(), capacity);
 
+
+        //get from min and max
+        int servingTimeMin =300;
+        int servingTimeMax =500;
+        cashes.get(0).setServiceTime(new Random().nextInt(300,500));//check if it is corrcet because i dont remember
+
+        // переглянути значення   в полі інтервалу, якщо воно порожнє то вибираємо стратегію з радномним,
+        // межі встановлюємо як  int servingTimeMin =300;
+        //        int servingTimeMax =500; інакше new IntervalGenerateStrategy(зі значенням з інпуту);
+
         //need add component for choosing strategy and input the interval;
+
         var generationStrategy = new IntervalGenerateStrategy(200);
         generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
 
+        ArrayList<ILogger> loggers = new ArrayList<>();
+
+        loggers.add(new TableLogger(valueOfLogger));
+        loggers.add(new ConsoleLogger());
+        CashRegister.setLoggers(loggers);
         new Thread(generatorPeople).start();
         station.startWork();
-        //add one button for stoping work
-        //start of spawn customers
+
     }
 
     //function for stop working
@@ -403,5 +422,9 @@ public class ApplicationController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("You want disconnect cash register number  " + cashRegisterDisconnection.getText());
         alert.showAndWait();
+        //опрацювати відповідь
+        station.useReservedCashRegister(station.getCashRegisters().get(Integer.parseInt(cashRegisterDisconnection.getText())));
     }
+
+    //додати таймер, який буде перевіряти стан черг, і оновлюватиме дані в таблиці.
 }

@@ -21,6 +21,9 @@ public class CashRegister implements ICashRegister{
 
     public CashRegister() {
     }
+    public CashRegister(Position position, boolean serviceable, boolean reserved) {
+        this(new PriorityQueue<>(),serviceable, reserved,position);
+    }
     public  CashRegister(Position position){
         this(new PriorityQueue<>(),true, false,position);
     }
