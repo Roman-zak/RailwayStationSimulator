@@ -17,38 +17,64 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ApplicationController implements Initializable {
-    @FXML ComboBox<Integer> countOfCashRegisters;
-    @FXML ComboBox<Integer> countOfEntrances;
-    @FXML TableView<CashRegisterWrapper> cashRegister1;
-    @FXML TableView<CashRegisterWrapper> cashRegister2;
-    @FXML TableView<CashRegisterWrapper> cashRegister3;
-    @FXML TableView<CashRegisterWrapper> cashRegister4;
-    @FXML TableView<CashRegisterWrapper> cashRegister5;
-    @FXML TableView<CashRegisterWrapper> cashRegisterSpare;
-    @FXML Label labelCashRegister1;
-    @FXML Label labelCashRegister2;
-    @FXML Label labelCashRegister3;
-    @FXML Label labelCashRegister4;
-    @FXML Label labelCashRegister5;
-    @FXML Label labelCashRegisterSpare;
-    @FXML TextField minServiceTime;
-    @FXML TextField maxServiceTime;
-    @FXML TextField cashRegisterDisconnection;
-    @FXML TableView<EntranceWrapper> tableEntrances;
-    @FXML TableView<CashRegisterWrapper> tableCashRegisters;
-    @FXML TableColumn<CashRegisterWrapper, String> cashRegisterPositionX;
-    @FXML TableColumn<CashRegisterWrapper, String> cashRegisterPositionY;
-    @FXML TableColumn<CashRegisterWrapper, Boolean> cashRegisterReserved;
-    @FXML TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
-    @FXML TableColumn<EntranceWrapper, String> entrancePositionX;
-    @FXML TableColumn<EntranceWrapper, String> entrancePositionY;
-    @FXML ComboBox<Integer> countOfDisconnect;
+    @FXML
+    ComboBox<Integer> countOfCashRegisters;
+    @FXML
+    ComboBox<Integer> countOfEntrances;
+    @FXML
+    TableView<CustomerWrapper> cashRegister1;
+    @FXML
+    TableView<CustomerWrapper> cashRegister2;
+    @FXML
+    TableView<CustomerWrapper> cashRegister3;
+    @FXML
+    TableView<CustomerWrapper> cashRegister4;
+    @FXML
+    TableView<CustomerWrapper> cashRegister5;
+    @FXML
+    TableView<CustomerWrapper> cashRegisterSpare;
+    @FXML
+    Label labelCashRegister1;
+    @FXML
+    Label labelCashRegister2;
+    @FXML
+    Label labelCashRegister3;
+    @FXML
+    Label labelCashRegister4;
+    @FXML
+    Label labelCashRegister5;
+    @FXML
+    Label labelCashRegisterSpare;
+    @FXML
+    TextField minServiceTime;
+    @FXML
+    TextField maxServiceTime;
+    @FXML
+    TextField cashRegisterDisconnection;
+    @FXML
+    TableView<EntranceWrapper> tableEntrances;
+    @FXML
+    TableView<CashRegisterWrapper> tableCashRegisters;
+    @FXML
+    TableColumn<CashRegisterWrapper, String> cashRegisterPositionX;
+    @FXML
+    TableColumn<CashRegisterWrapper, String> cashRegisterPositionY;
+    @FXML
+    TableColumn<CashRegisterWrapper, Boolean> cashRegisterReserved;
+    @FXML
+    TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
+    @FXML
+    TableColumn<EntranceWrapper, String> entrancePositionX;
+    @FXML
+    TableColumn<EntranceWrapper, String> entrancePositionY;
+    @FXML
+    ComboBox<Integer> countOfDisconnect;
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
     ObservableList<Integer> valueOfDisconnect = FXCollections.observableArrayList();
     ObservableList<EntranceWrapper> entrances = FXCollections.observableArrayList(
-            new EntranceWrapper("0","0"),
-            new EntranceWrapper("1","2")
+            new EntranceWrapper("0", "0"),
+            new EntranceWrapper("1", "2")
     );
 
     ObservableList<CashRegisterWrapper> cashRegisters = FXCollections.observableArrayList(
@@ -91,7 +117,7 @@ public class ApplicationController implements Initializable {
 
         cashRegisterPositionX.setEditable(true);
         cashRegisterPositionX.setCellFactory(TextFieldTableCell.forTableColumn());
-        cashRegisterPositionX.setOnEditCommit(
+    /*    cashRegisterPositionX.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
@@ -101,9 +127,10 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
+*/
         cashRegisterPositionY.setEditable(true);
         cashRegisterPositionY.setCellFactory(TextFieldTableCell.forTableColumn());
-        cashRegisterPositionY.setOnEditCommit(
+      /*  cashRegisterPositionY.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
@@ -113,11 +140,11 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-
+*/
         cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
         cashRegisterReserved.setCellFactory(tc -> new CheckBoxTableCell<>());
         cashRegisterReserved.setEditable(true);
-        cashRegisterReserved.setOnEditCommit(
+ /*       cashRegisterReserved.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
@@ -127,26 +154,27 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-
+*/
         cashRegisterServiceable.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsServiceable()));
         cashRegisterServiceable.setCellFactory(tc -> new CheckBoxTableCell<>());
         cashRegisterServiceable.setEditable(true);
-        cashRegisterServiceable.setOnEditCommit(
+    /*    cashRegisterServiceable.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
                         ((CashRegisterWrapper) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setIsServiceable(t.getNewValue());
-
                     }
                 }
         );
-
+*/
         cashRegisterPositionX.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posX"));
         cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
         cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
         cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
+
+
 
         tableCashRegisters.setItems(cashRegisters);
 
@@ -163,7 +191,10 @@ public class ApplicationController implements Initializable {
         while (entrances.size() > countOfEntrances.getValue()) {
             entrances.remove(entrances.size() - 1);
         }
+
+
     }
+
 
 
     public void handleChangeCountOfCashRegisters(ActionEvent event){
@@ -172,15 +203,15 @@ public class ApplicationController implements Initializable {
         int count = countOfCashRegisters.getValue();
 
         int curCount = cashRegisters.size();
-        if(count>curCount){
-            for( int i=curCount;i< count;++i){
-                cashRegisters.add(new CashRegisterWrapper(String.format("%d",i),String.format("%d",i),false,true));
+        if (count > curCount) {
+            for (int i = curCount; i < count; ++i) {
+                cashRegisters.add(new CashRegisterWrapper(String.format("%d", i), String.format("%d", i), false, true));
             }
-        }else{
-           while(curCount>count){
-               cashRegisters.remove(count);
-               curCount--;
-           }
+        } else {
+            while (curCount > count) {
+                cashRegisters.remove(count);
+                curCount--;
+            }
         }
 
         this.cashRegister1.setVisible(true);
@@ -194,19 +225,19 @@ public class ApplicationController implements Initializable {
         this.labelCashRegister4.setVisible(true);
         this.labelCashRegister5.setVisible(true);
 
-        if(count < 5) {
+        if (count < 5) {
             this.cashRegister5.setVisible(false);
             this.labelCashRegister5.setVisible(false);
         }
-        if(count < 4) {
+        if (count < 4) {
             this.cashRegister4.setVisible(false);
             this.labelCashRegister4.setVisible(false);
         }
-        if(count < 3) {
+        if (count < 3) {
             this.cashRegister3.setVisible(false);
             this.labelCashRegister3.setVisible(false);
         }
-        if(count < 2) {
+        if (count < 2) {
             this.cashRegister2.setVisible(false);
             this.labelCashRegister2.setVisible(false);
         }
@@ -231,24 +262,24 @@ public class ApplicationController implements Initializable {
         List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);
         //get real data from table
         //for now
-        for(int i=0;i<countCash;++i){
-            cashes.add(new CashRegister(new Position(i,i)));
+        for (int i = 0; i < countCash; ++i) {
+            cashes.add(new CashRegister(new Position(i, i)));
         }
 
         var entrances = new ArrayList<Entrance>(countEntrance);
         //get real data from table
         //for now
-        for(int i=0;i<countCash;++i){
-            entrances.add(new Entrance(new Position(i,i)));
+        for (int i = 0; i < countCash; ++i) {
+            entrances.add(new Entrance(new Position(i, i)));
         }
 
         // should be get from ui
         var capacity = 30;
-        station = new Station(entrances,cashes, new QueueResolver(),capacity);
+        station = new Station(entrances, cashes, new QueueResolver(), capacity);
 
         //need add component for choosing strategy and input the interval;
         var generationStrategy = new IntervalGenerateStrategy(200);
-        generatorPeople = new ThreadGeneratorPeople(generationStrategy,station,70);
+        generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
 
         new Thread(generatorPeople).start();
         station.startWork();
@@ -257,13 +288,14 @@ public class ApplicationController implements Initializable {
     }
 
     //function for stop working
-    public void handleStop(ActionEvent event){
+    public void handleStop(ActionEvent event) {
         station.endWork();
         generatorPeople.stopGeneration();
     }
-    public void handleDisconnectCashRegister(ActionEvent event){
+
+    public void handleDisconnectCashRegister(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("You want disconnect cash register number  " +  cashRegisterDisconnection.getText());
+        alert.setContentText("You want disconnect cash register number  " + cashRegisterDisconnection.getText());
         alert.showAndWait();
     }
 }
