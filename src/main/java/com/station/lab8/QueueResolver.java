@@ -11,16 +11,19 @@ public class QueueResolver implements IQueueResolver {
         ICashRegister temp = new CashRegister();
         temp = cashRegisters.get(0);
         for (ICashRegister cr:cashRegisters) {
-            if (cr.getQueue().size()==0){
-                bestPosition = cr;
-                break;
+            if(cr.isServiceable()){
+                if (cr.getQueue().size()==0){
+                    bestPosition = cr;
+                    break;
+                }
+                else if(cr.getQueue().size()<temp.getQueue().size()){
+                    bestPosition = cr;
+                    temp = cr;
+                } else if (cr.getQueue().size()==temp.getQueue().size()) {
+                    bestPosition = cr.getPosition().Distance(start)<temp.getPosition().Distance(start)?cr:temp;
+                }
             }
-            else if(cr.getQueue().size()<temp.getQueue().size()){
-                bestPosition = cr;
-                temp = cr;
-            } else if (cr.getQueue().size()==temp.getQueue().size()) {
-                bestPosition = cr.getPosition().Distance(start)<temp.getPosition().Distance(start)?cr:temp;
-            }
+
         }
 
         return bestPosition;
