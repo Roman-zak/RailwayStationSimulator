@@ -91,7 +91,7 @@ public class ApplicationController implements Initializable {
 
         cashRegisterPositionX.setEditable(true);
         cashRegisterPositionX.setCellFactory(TextFieldTableCell.forTableColumn());
-        cashRegisterPositionX.setOnEditCommit(
+    /*    cashRegisterPositionX.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
@@ -101,10 +101,10 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-
+*/
         cashRegisterPositionY.setEditable(true);
         cashRegisterPositionY.setCellFactory(TextFieldTableCell.forTableColumn());
-        cashRegisterPositionY.setOnEditCommit(
+      /*  cashRegisterPositionY.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
@@ -114,11 +114,11 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-
+*/
         cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
         cashRegisterReserved.setCellFactory(tc -> new CheckBoxTableCell<>());
         cashRegisterReserved.setEditable(true);
-        cashRegisterReserved.setOnEditCommit(
+ /*       cashRegisterReserved.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
@@ -128,11 +128,11 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-
+*/
         cashRegisterServiceable.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsServiceable()));
         cashRegisterServiceable.setCellFactory(tc -> new CheckBoxTableCell<>());
         cashRegisterServiceable.setEditable(true);
-        cashRegisterServiceable.setOnEditCommit(
+    /*    cashRegisterServiceable.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
@@ -142,8 +142,7 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-
-
+*/
         cashRegisterPositionX.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posX"));
         cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
         cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
@@ -188,10 +187,6 @@ public class ApplicationController implements Initializable {
                curCount--;
            }
         }
-
-
-
-
 
         this.cashRegister1.setVisible(true);
         this.cashRegister2.setVisible(true);
