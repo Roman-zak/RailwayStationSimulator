@@ -4,11 +4,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Customer implements ICustomer {
-    private final SimpleIntegerProperty posX = new SimpleIntegerProperty();
+ /*   private final SimpleIntegerProperty posX = new SimpleIntegerProperty();
     private final SimpleIntegerProperty posY = new SimpleIntegerProperty();
     private final SimpleIntegerProperty countTickets = new SimpleIntegerProperty();
     private final SimpleIntegerProperty curId = new SimpleIntegerProperty();
-
+*/
     private int ticketsCount;
     static int IdCount = 0;
     private final int id;
@@ -23,7 +23,7 @@ public class Customer implements ICustomer {
     public Customer() {
         id = IdCount;
         IdCount++;
-        curId.set(id);
+       // curId.set(id);
     }
 
     public Customer(int ticketsCount, CustomerStatus status, Entrance entrance) {
@@ -32,14 +32,14 @@ public class Customer implements ICustomer {
         this.status = status;
         this.entrance = entrance;
 
-        countTickets.set(ticketsCount);
+      /*  countTickets.set(ticketsCount);
         if (entrance != null) {
             posX.set(entrance.getPosition().getX());
             posY.set(entrance.getPosition().getY());
-        }
+        }*/
     }
 
-    public Integer getPosX() {
+   /* public Integer getPosX() {
         return posX.get();
     }
 
@@ -53,12 +53,12 @@ public class Customer implements ICustomer {
 
     public Integer getCurId() {
         return curId.get();
-    }
+    }*/
 
     @Override
     public void setTicketsCount(int ticketsCount) {
         this.ticketsCount = ticketsCount;
-        countTickets.set(ticketsCount);
+        //countTickets.set(ticketsCount);
     }
 
     @Override
@@ -69,10 +69,10 @@ public class Customer implements ICustomer {
     @Override
     public void setEntrance(Entrance entrance) {
         this.entrance = entrance;
-        if (entrance != null) {
+      /*  if (entrance != null) {
             posX.set(entrance.getPosition().getX());
             posY.set(entrance.getPosition().getY());
-        }
+        }*/
     }
 
 
