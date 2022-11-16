@@ -74,6 +74,9 @@ public class ApplicationController implements Initializable {
     @FXML
     TableView<CustomerWrapper> cashRegisterSpare;
     @FXML
+    TableView<LogWrapper> logView;
+    @FXML
+    Label labelCashRegister1;
     TableColumn<CustomerWrapper, Integer> cashRegisterSpareId;
     @FXML
     TableColumn<CustomerWrapper, Integer> cashRegisterSpareTickets;
@@ -113,6 +116,10 @@ public class ApplicationController implements Initializable {
     @FXML
     TableColumn<EntranceWrapper, String> entrancePositionY;
     @FXML
+    TableColumn<LogWrapper, Integer> loggerViewId;
+    @FXML
+    TableColumn<LogWrapper, String> loggerViewText;
+    @FXML
     ComboBox<Integer> countOfDisconnect;
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
@@ -134,50 +141,13 @@ public class ApplicationController implements Initializable {
             new CashRegisterWrapper("1", "1", false, false)
     );
 
-
+    ObservableList<LogWrapper> valueOfLogger = FXCollections.observableArrayList();
     //
     Station station;
     ThreadGeneratorPeople generatorPeople;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.cashRegister1Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
-        this.cashRegister1Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
-        this.cashRegister1Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
-        this.cashRegister1Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
-        this.cashRegister1.setItems(this.customersCashRegister1);
-
-        this.cashRegister2Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
-        this.cashRegister2Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
-        this.cashRegister2Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
-        this.cashRegister2Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
-        this.cashRegister2.setItems(this.customersCashRegister2);
-
-        this.cashRegister3Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
-        this.cashRegister3Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
-        this.cashRegister3Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
-        this.cashRegister3Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
-        this.cashRegister3.setItems(this.customersCashRegister3);
-
-        this.cashRegister4Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
-        this.cashRegister4Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
-        this.cashRegister4Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
-        this.cashRegister4Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
-        this.cashRegister4.setItems(this.customersCashRegister4);
-
-        this.cashRegister5Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
-        this.cashRegister5Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
-        this.cashRegister5Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
-        this.cashRegister5Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
-        this.cashRegister5.setItems(this.customersCashRegister5);
-
-        this.cashRegisterSpareId.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
-        this.cashRegisterSpareTickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
-        this.cashRegisterSpareStatus.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
-        this.cashRegisterSpareEntrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
-        this.cashRegisterSpare.setItems(this.customersCashRegisterSpare);
-
-
         entrancePositionX.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posX"));
         entrancePositionX.setCellFactory(TextFieldTableCell.forTableColumn());
         entrancePositionX.setOnEditCommit(
@@ -202,6 +172,9 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
+        loggerViewId.setCellValueFactory(new PropertyValueFactory<LogWrapper, Integer>("id"));
+        loggerViewText.setCellValueFactory(new PropertyValueFactory<LogWrapper, String>("text"));
+
         tableEntrances.setItems(entrances);
 
         cashRegisterPositionX.setEditable(true);
@@ -263,11 +236,13 @@ public class ApplicationController implements Initializable {
         cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
         cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
 
+
         tableCashRegisters.setItems(cashRegisters);
 
         countOfCashRegisters.setItems(valueOfComboBox);
         countOfEntrances.setItems(valueOfComboBox);
         countOfDisconnect.setItems(valueOfDisconnect);
+
     }
 
     public void handleChangeCountOfEntrances(ActionEvent event) {
@@ -283,8 +258,7 @@ public class ApplicationController implements Initializable {
     }
 
 
-
-    public void handleChangeCountOfCashRegisters(ActionEvent event){
+    public void handleChangeCountOfCashRegisters(ActionEvent event) {
         //need change count of rows in table with cash register
 
         int count = countOfCashRegisters.getValue();
@@ -343,7 +317,7 @@ public class ApplicationController implements Initializable {
 //        this.labelCashRegisterSpare.setVisible(false);
     }
 
-    public void handleStart(ActionEvent event){
+    public void handleStart(ActionEvent event) {
         int countCash = countOfCashRegisters.getValue();
         int countEntrance = countOfEntrances.getValue();
         List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);

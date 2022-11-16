@@ -267,10 +267,10 @@
                         </TableView>
                      </children>
                   </GridPane>
-                  <TableView prefHeight="52.0" prefWidth="232.0" GridPane.rowIndex="2">
+                  <TableView fx:id="logView" prefHeight="52.0" prefWidth="232.0" GridPane.rowIndex="2">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="LogNumber" />
-                      <TableColumn prefWidth="503.2000152587891" text="Text" />
+                      <TableColumn fx:id="loggerViewId" prefWidth="75.0" text="Id" />
+                      <TableColumn fx:id="loggerViewText" prefWidth="503.2000152587891" text="Text" />
                     </columns>
                   </TableView>
                </children>
