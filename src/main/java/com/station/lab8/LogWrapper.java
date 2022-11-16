@@ -4,33 +4,33 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class LogWrapper {
-    private final SimpleIntegerProperty number;
+    private final SimpleIntegerProperty id;
     private final SimpleStringProperty text;
 
     LogWrapper() {
-        this.number = new SimpleIntegerProperty();
+        this.id = new SimpleIntegerProperty();
         this.text = new SimpleStringProperty();
     }
 
     LogWrapper(Integer number, String text) {
         this();
-        this.number.set(number);
+        this.id.set(number);
         this.text.set(text);
     }
 
-    void setNumber(Integer number) {
-        this.number.set(number);
+    public void setId(Integer id) {
+        this.id.set(id);
     }
 
-    void setText(String text) {
+    public void setText(String text) {
         this.text.set(text);
     }
 
-    Integer getNumber() {
-        return this.number.get();
+    public Integer getId() {
+        return this.id.get();
     }
 
-    String getText() {
+    public String getText() {
         return this.text.get();
     }
 }

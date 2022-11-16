@@ -1,4 +1,5 @@
 package com.station.lab8;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,8 @@ public class ApplicationController implements Initializable {
     TableView<CustomerWrapper> cashRegister5;
     @FXML
     TableView<CustomerWrapper> cashRegisterSpare;
+    @FXML
+    TableView<LogWrapper> logView;
     @FXML
     Label labelCashRegister1;
     @FXML
@@ -68,6 +72,10 @@ public class ApplicationController implements Initializable {
     @FXML
     TableColumn<EntranceWrapper, String> entrancePositionY;
     @FXML
+    TableColumn<LogWrapper, Integer> loggerViewId;
+    @FXML
+    TableColumn<LogWrapper, String> loggerViewText;
+    @FXML
     ComboBox<Integer> countOfDisconnect;
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
@@ -76,13 +84,12 @@ public class ApplicationController implements Initializable {
             new EntranceWrapper("0", "0"),
             new EntranceWrapper("1", "2")
     );
-
     ObservableList<CashRegisterWrapper> cashRegisters = FXCollections.observableArrayList(
             new CashRegisterWrapper("0", "0", true, true),
             new CashRegisterWrapper("1", "1", false, false)
     );
 
-
+    ObservableList<LogWrapper> valueOfLogger = FXCollections.observableArrayList();
     //
     Station station;
     ThreadGeneratorPeople generatorPeople;
@@ -113,6 +120,9 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
+        loggerViewId.setCellValueFactory(new PropertyValueFactory<LogWrapper, Integer>("id"));
+        loggerViewText.setCellValueFactory(new PropertyValueFactory<LogWrapper, String>("text"));
+
         tableEntrances.setItems(entrances);
 
         cashRegisterPositionX.setEditable(true);
@@ -175,12 +185,12 @@ public class ApplicationController implements Initializable {
         cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
 
 
-
         tableCashRegisters.setItems(cashRegisters);
 
         countOfCashRegisters.setItems(valueOfComboBox);
         countOfEntrances.setItems(valueOfComboBox);
         countOfDisconnect.setItems(valueOfDisconnect);
+
     }
 
     public void handleChangeCountOfEntrances(ActionEvent event) {
@@ -196,8 +206,7 @@ public class ApplicationController implements Initializable {
     }
 
 
-
-    public void handleChangeCountOfCashRegisters(ActionEvent event){
+    public void handleChangeCountOfCashRegisters(ActionEvent event) {
         //need change count of rows in table with cash register
 
         int count = countOfCashRegisters.getValue();
@@ -256,7 +265,7 @@ public class ApplicationController implements Initializable {
 //        this.labelCashRegisterSpare.setVisible(false);
     }
 
-    public void handleStart(ActionEvent event){
+    public void handleStart(ActionEvent event) {
         int countCash = countOfCashRegisters.getValue();
         int countEntrance = countOfEntrances.getValue();
         List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);
