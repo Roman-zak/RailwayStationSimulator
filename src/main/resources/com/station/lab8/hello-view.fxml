@@ -177,12 +177,12 @@
                                     <Insets left="25.0" top="58.0" />
                                  </GridPane.margin>
                               </Label>
-                              <TextField maxWidth="60.0">
+                              <TextField fx:id="саpacityStation" maxWidth="60.0">
                                  <GridPane.margin>
                                     <Insets left="140.0" top="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField maxWidth="60.0">
+                              <TextField fx:id="intervalStation" maxWidth="60.0">
                                  <GridPane.margin>
                                     <Insets left="220.0" top="20.0" />
                                  </GridPane.margin>

@@ -1,4 +1,5 @@
 package com.station.lab8;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -11,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,8 +87,10 @@ public class ApplicationController implements Initializable {
     TableColumn<CustomerWrapper, CustomerStatus> cashRegisterSpareStatus;
     @FXML
     TableColumn<CustomerWrapper, String> cashRegisterSpareEntrance;
-    @FXML Label labelCashRegister2;
-    @FXML Label labelCashRegister3;
+    @FXML
+    Label labelCashRegister2;
+    @FXML
+    Label labelCashRegister3;
     @FXML
     Label labelCashRegister4;
     @FXML
@@ -95,6 +99,10 @@ public class ApplicationController implements Initializable {
     Label labelCashRegisterSpare;
     @FXML
     TextField minServiceTime;
+    @FXML
+    TextField саpacityStation;
+    @FXML
+    TextField intervalStation;
     @FXML
     TextField maxServiceTime;
     @FXML
