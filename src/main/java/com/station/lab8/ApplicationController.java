@@ -1,4 +1,5 @@
 package com.station.lab8;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
@@ -11,44 +12,71 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ApplicationController implements Initializable {
-    @FXML ComboBox<Integer> countOfCashRegisters;
-    @FXML ComboBox<Integer> countOfEntrances;
-    @FXML TableView<CashRegisterWrapper> cashRegister1;
-    @FXML TableView<CashRegisterWrapper> cashRegister2;
-    @FXML TableView<CashRegisterWrapper> cashRegister3;
-    @FXML TableView<CashRegisterWrapper> cashRegister4;
-    @FXML TableView<CashRegisterWrapper> cashRegister5;
-    @FXML TableView<CashRegisterWrapper> cashRegisterSpare;
-    @FXML Label labelCashRegister1;
-    @FXML Label labelCashRegister2;
-    @FXML Label labelCashRegister3;
-    @FXML Label labelCashRegister4;
-    @FXML Label labelCashRegister5;
-    @FXML Label labelCashRegisterSpare;
-    @FXML TextField minServiceTime;
-    @FXML TextField maxServiceTime;
-    @FXML TextField cashRegisterDisconnection;
-    @FXML TableView<EntranceWrapper> tableEntrances;
-    @FXML TableView<CashRegisterWrapper> tableCashRegisters;
-    @FXML TableColumn<CashRegisterWrapper, String> cashRegisterPositionX;
-    @FXML TableColumn<CashRegisterWrapper, String> cashRegisterPositionY;
-    @FXML TableColumn<CashRegisterWrapper, Boolean> cashRegisterReserved;
-    @FXML TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
-    @FXML TableColumn<EntranceWrapper, String> entrancePositionX;
-    @FXML TableColumn<EntranceWrapper, String> entrancePositionY;
-    @FXML ComboBox<Integer> countOfDisconnect;
+    @FXML
+    ComboBox<Integer> countOfCashRegisters;
+    @FXML
+    ComboBox<Integer> countOfEntrances;
+    @FXML
+    TableView<CustomerWrapper> cashRegister1;
+    @FXML
+    TableView<CustomerWrapper> cashRegister2;
+    @FXML
+    TableView<CustomerWrapper> cashRegister3;
+    @FXML
+    TableView<CustomerWrapper> cashRegister4;
+    @FXML
+    TableView<CustomerWrapper> cashRegister5;
+    @FXML
+    TableView<CustomerWrapper> cashRegisterSpare;
+    @FXML
+    Label labelCashRegister1;
+    @FXML
+    Label labelCashRegister2;
+    @FXML
+    Label labelCashRegister3;
+    @FXML
+    Label labelCashRegister4;
+    @FXML
+    Label labelCashRegister5;
+    @FXML
+    Label labelCashRegisterSpare;
+    @FXML
+    TextField minServiceTime;
+    @FXML
+    TextField maxServiceTime;
+    @FXML
+    TextField cashRegisterDisconnection;
+    @FXML
+    TableView<EntranceWrapper> tableEntrances;
+    @FXML
+    TableView<CashRegisterWrapper> tableCashRegisters;
+    @FXML
+    TableColumn<CashRegisterWrapper, String> cashRegisterPositionX;
+    @FXML
+    TableColumn<CashRegisterWrapper, String> cashRegisterPositionY;
+    @FXML
+    TableColumn<CashRegisterWrapper, Boolean> cashRegisterReserved;
+    @FXML
+    TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
+    @FXML
+    TableColumn<EntranceWrapper, String> entrancePositionX;
+    @FXML
+    TableColumn<EntranceWrapper, String> entrancePositionY;
+    @FXML
+    ComboBox<Integer> countOfDisconnect;
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
     ObservableList<Integer> valueOfDisconnect = FXCollections.observableArrayList();
     ObservableList<EntranceWrapper> entrances = FXCollections.observableArrayList(
-            new EntranceWrapper("0","0"),
-            new EntranceWrapper("1","2")
+            new EntranceWrapper("0", "0"),
+            new EntranceWrapper("1", "2")
     );
 
     ObservableList<CashRegisterWrapper> cashRegisters = FXCollections.observableArrayList(
@@ -149,7 +177,6 @@ public class ApplicationController implements Initializable {
         cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
 
 
-
         tableCashRegisters.setItems(cashRegisters);
 
         countOfCashRegisters.setItems(valueOfComboBox);
@@ -170,22 +197,21 @@ public class ApplicationController implements Initializable {
     }
 
 
-
-    public void handleChangeCountOfCashRegisters(ActionEvent event){
+    public void handleChangeCountOfCashRegisters(ActionEvent event) {
         //need change count of rows in table with cash register
 
         int count = countOfCashRegisters.getValue();
 
         int curCount = cashRegisters.size();
-        if(count>curCount){
-            for( int i=curCount;i< count;++i){
-                cashRegisters.add(new CashRegisterWrapper(String.format("%d",i),String.format("%d",i),false,true));
+        if (count > curCount) {
+            for (int i = curCount; i < count; ++i) {
+                cashRegisters.add(new CashRegisterWrapper(String.format("%d", i), String.format("%d", i), false, true));
             }
-        }else{
-           while(curCount>count){
-               cashRegisters.remove(count);
-               curCount--;
-           }
+        } else {
+            while (curCount > count) {
+                cashRegisters.remove(count);
+                curCount--;
+            }
         }
 
         this.cashRegister1.setVisible(true);
@@ -199,19 +225,19 @@ public class ApplicationController implements Initializable {
         this.labelCashRegister4.setVisible(true);
         this.labelCashRegister5.setVisible(true);
 
-        if(count < 5) {
+        if (count < 5) {
             this.cashRegister5.setVisible(false);
             this.labelCashRegister5.setVisible(false);
         }
-        if(count < 4) {
+        if (count < 4) {
             this.cashRegister4.setVisible(false);
             this.labelCashRegister4.setVisible(false);
         }
-        if(count < 3) {
+        if (count < 3) {
             this.cashRegister3.setVisible(false);
             this.labelCashRegister3.setVisible(false);
         }
-        if(count < 2) {
+        if (count < 2) {
             this.cashRegister2.setVisible(false);
             this.labelCashRegister2.setVisible(false);
         }
@@ -230,30 +256,30 @@ public class ApplicationController implements Initializable {
 //        this.labelCashRegisterSpare.setVisible(false);
     }
 
-    public void handleStart(ActionEvent event){
+    public void handleStart(ActionEvent event) {
         int countCash = countOfCashRegisters.getValue();
         int countEntrance = countOfEntrances.getValue();
         List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);
         //get real data from table
         //for now
-        for(int i=0;i<countCash;++i){
-            cashes.add(new CashRegister(new Position(i,i)));
+        for (int i = 0; i < countCash; ++i) {
+            cashes.add(new CashRegister(new Position(i, i)));
         }
 
         var entrances = new ArrayList<Entrance>(countEntrance);
         //get real data from table
         //for now
-        for(int i=0;i<countCash;++i){
-            entrances.add(new Entrance(new Position(i,i)));
+        for (int i = 0; i < countCash; ++i) {
+            entrances.add(new Entrance(new Position(i, i)));
         }
 
         // should be get from ui
         var capacity = 30;
-        station = new Station(entrances,cashes, new QueueResolver(),capacity);
+        station = new Station(entrances, cashes, new QueueResolver(), capacity);
 
         //need add component for choosing strategy and input the interval;
         var generationStrategy = new IntervalGenerateStrategy(200);
-        generatorPeople = new ThreadGeneratorPeople(generationStrategy,station,70);
+        generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
 
         new Thread(generatorPeople).start();
         station.startWork();
@@ -262,13 +288,14 @@ public class ApplicationController implements Initializable {
     }
 
     //function for stop working
-    public void handleStop(ActionEvent event){
+    public void handleStop(ActionEvent event) {
         station.endWork();
         generatorPeople.stopGeneration();
     }
-    public void handleDisconnectCashRegister(ActionEvent event){
+
+    public void handleDisconnectCashRegister(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("You want disconnect cash register number  " +  cashRegisterDisconnection.getText());
+        alert.setContentText("You want disconnect cash register number  " + cashRegisterDisconnection.getText());
         alert.showAndWait();
     }
 }
