@@ -380,7 +380,7 @@ public class ApplicationController implements Initializable {
         }
 
         // should be get from ui
-        var capacity = ca;
+        var capacity = 30;
         station = new Station(entran, cashes, new QueueResolver(), capacity);
 
         //need add component for choosing strategy and input the interval;
