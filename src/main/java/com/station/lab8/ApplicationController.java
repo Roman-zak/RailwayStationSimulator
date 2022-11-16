@@ -156,6 +156,7 @@ public class ApplicationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         this.cashRegister1Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
         this.cashRegister1Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
         this.cashRegister1Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
@@ -223,7 +224,7 @@ public class ApplicationController implements Initializable {
 
         cashRegisterPositionX.setEditable(true);
         cashRegisterPositionX.setCellFactory(TextFieldTableCell.forTableColumn());
-    /*    cashRegisterPositionX.setOnEditCommit(
+        cashRegisterPositionX.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
@@ -233,10 +234,10 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-*/
+
         cashRegisterPositionY.setEditable(true);
         cashRegisterPositionY.setCellFactory(TextFieldTableCell.forTableColumn());
-      /*  cashRegisterPositionY.setOnEditCommit(
+        cashRegisterPositionY.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
@@ -246,11 +247,11 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-*/
+
         cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
         cashRegisterReserved.setCellFactory(tc -> new CheckBoxTableCell<>());
         cashRegisterReserved.setEditable(true);
- /*       cashRegisterReserved.setOnEditCommit(
+        cashRegisterReserved.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
@@ -260,11 +261,10 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-*/
         cashRegisterServiceable.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsServiceable()));
         cashRegisterServiceable.setCellFactory(tc -> new CheckBoxTableCell<>());
         cashRegisterServiceable.setEditable(true);
-    /*    cashRegisterServiceable.setOnEditCommit(
+        cashRegisterServiceable.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
@@ -274,7 +274,6 @@ public class ApplicationController implements Initializable {
                     }
                 }
         );
-*/
         cashRegisterPositionX.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posX"));
         cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
         cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
@@ -368,19 +367,21 @@ public class ApplicationController implements Initializable {
         //get real data from table
         //for now
         for (int i = 0; i < countCash; ++i) {
-            cashes.add(new CashRegister(new Position(i, i)));
+            cashes.add(new CashRegister(new Position(Integer.parseInt(cashRegisters.get(i).positionX),
+                    Integer.parseInt(cashRegisters.get(i).positionY))));
         }
 
-        var entrances = new ArrayList<Entrance>(countEntrance);
+        var entran = new ArrayList<Entrance>(countEntrance);
         //get real data from table
         //for now
         for (int i = 0; i < countCash; ++i) {
-            entrances.add(new Entrance(new Position(i, i)));
+            entran.add(new Entrance(new Position(Integer.parseInt(entrances.get(i).positionX),
+                    Integer.parseInt(entrances.get(i).positionY))));
         }
 
         // should be get from ui
-        var capacity = 30;
-        station = new Station(entrances, cashes, new QueueResolver(), capacity);
+        var capacity = ca;
+        station = new Station(entran, cashes, new QueueResolver(), capacity);
 
         //need add component for choosing strategy and input the interval;
         var generationStrategy = new IntervalGenerateStrategy(200);
