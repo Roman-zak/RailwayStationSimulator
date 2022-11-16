@@ -24,21 +24,66 @@ public class ApplicationController implements Initializable {
     @FXML
     TableView<CustomerWrapper> cashRegister1;
     @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister1Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister1Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister1Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister1Entrance;
+    @FXML
     TableView<CustomerWrapper> cashRegister2;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister2Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister2Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister2Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister2Entrance;
     @FXML
     TableView<CustomerWrapper> cashRegister3;
     @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister3Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister3Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister3Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister3Entrance;
+    @FXML
     TableView<CustomerWrapper> cashRegister4;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister4Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister4Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister4Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister4Entrance;
     @FXML
     TableView<CustomerWrapper> cashRegister5;
     @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister5Id;
+    @FXML
+    TableColumn<CustomerWrapper, Integer> cashRegister5Tickets;
+    @FXML
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegister5Status;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegister5Entrance;
+    @FXML
     TableView<CustomerWrapper> cashRegisterSpare;
     @FXML
-    Label labelCashRegister1;
+    TableColumn<CustomerWrapper, Integer> cashRegisterSpareId;
     @FXML
-    Label labelCashRegister2;
+    TableColumn<CustomerWrapper, Integer> cashRegisterSpareTickets;
     @FXML
-    Label labelCashRegister3;
+    TableColumn<CustomerWrapper, CustomerStatus> cashRegisterSpareStatus;
+    @FXML
+    TableColumn<CustomerWrapper, String> cashRegisterSpareEntrance;
+    @FXML Label labelCashRegister1;
+    @FXML Label labelCashRegister2;
+    @FXML Label labelCashRegister3;
     @FXML
     Label labelCashRegister4;
     @FXML
@@ -72,6 +117,13 @@ public class ApplicationController implements Initializable {
 
     ObservableList<Integer> valueOfComboBox = FXCollections.observableArrayList(1, 2, 3, 4, 5);
     ObservableList<Integer> valueOfDisconnect = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister1 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister2 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister3 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister4 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegister5 = FXCollections.observableArrayList();
+    ObservableList<CustomerWrapper> customersCashRegisterSpare = FXCollections.observableArrayList();
+
     ObservableList<EntranceWrapper> entrances = FXCollections.observableArrayList(
             new EntranceWrapper("0", "0"),
             new EntranceWrapper("1", "2")
@@ -89,6 +141,43 @@ public class ApplicationController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.cashRegister1Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister1Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister1Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister1Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister1.setItems(this.customersCashRegister1);
+
+        this.cashRegister2Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister2Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister2Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister2Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister2.setItems(this.customersCashRegister2);
+
+        this.cashRegister3Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister3Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister3Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister3Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister3.setItems(this.customersCashRegister3);
+
+        this.cashRegister4Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister4Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister4Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister4Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister4.setItems(this.customersCashRegister4);
+
+        this.cashRegister5Id.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegister5Tickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegister5Status.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegister5Entrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegister5.setItems(this.customersCashRegister5);
+
+        this.cashRegisterSpareId.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("id"));
+        this.cashRegisterSpareTickets.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, Integer>("ticketsCount"));
+        this.cashRegisterSpareStatus.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, CustomerStatus>("status"));
+        this.cashRegisterSpareEntrance.setCellValueFactory(new PropertyValueFactory<CustomerWrapper, String>("entrance"));
+        this.cashRegisterSpare.setItems(this.customersCashRegisterSpare);
+
+
         entrancePositionX.setCellValueFactory(new PropertyValueFactory<EntranceWrapper, String>("posX"));
         entrancePositionX.setCellFactory(TextFieldTableCell.forTableColumn());
         entrancePositionX.setOnEditCommit(
@@ -173,8 +262,6 @@ public class ApplicationController implements Initializable {
         cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
         cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
         cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
-
-
 
         tableCashRegisters.setItems(cashRegisters);
 

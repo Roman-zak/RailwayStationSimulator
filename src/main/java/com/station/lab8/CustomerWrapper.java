@@ -3,56 +3,58 @@ package com.station.lab8;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleSetProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class CustomerWrapper {
-    SimpleIntegerProperty id;
-    SimpleIntegerProperty ticketsCount;
-    SimpleObjectProperty<CustomerStatus> status;
-    SimpleObjectProperty<Entrance> entrance;
+    private final SimpleIntegerProperty id;
+    private final SimpleIntegerProperty ticketsCount;
+    private final SimpleObjectProperty<CustomerStatus> status;
+    private final SimpleStringProperty entrance;
 
     CustomerWrapper() {
         id = new SimpleIntegerProperty();
         ticketsCount = new SimpleIntegerProperty();
         status = new SimpleObjectProperty<CustomerStatus>();
-        entrance = new SimpleObjectProperty<Entrance>();
+        entrance = new SimpleStringProperty();
     }
 
-    CustomerWrapper(Integer id, Integer ticketsCount, CustomerStatus status, Entrance entrance) {
+    CustomerWrapper(Integer id, Integer ticketsCount, CustomerStatus status, String entrance) {
+        this();
         this.id.set(id);
         this.ticketsCount.set(ticketsCount);
         this.status.set(status);
         this.entrance.set(entrance);
     }
 
-    void setId(Integer id) {
+    public void setId(Integer id) {
         this.id.set(id);
     }
 
-    void setTicketsCount(Integer ticketsCount) {
+    public void setTicketsCount(Integer ticketsCount) {
         this.ticketsCount.set(ticketsCount);
     }
 
-    void setStatus(CustomerStatus status) {
+    public void setStatus(CustomerStatus status) {
         this.status.set(status);
     }
 
-    void setEntrance(Entrance entrance) {
+    public void setEntrance(String entrance) {
         this.entrance.set(entrance);
     }
 
-    Integer getId() {
+    public Integer getId() {
         return id.get();
     }
 
-    Integer getTicketsCount() {
+    public Integer getTicketsCount() {
         return ticketsCount.get();
     }
 
-    CustomerStatus getStatus() {
+    public CustomerStatus getStatus() {
         return status.get();
     }
 
-    Entrance getEntrance() {
+    public String getEntrance() {
         return entrance.get();
     }
 
