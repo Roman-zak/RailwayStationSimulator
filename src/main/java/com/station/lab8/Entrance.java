@@ -17,4 +17,9 @@ public class Entrance {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        return "X:" + this.position.getX() + " Y:" + this.position.getY();
+    }
 }
