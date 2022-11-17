@@ -426,10 +426,10 @@ public class ApplicationController implements Initializable {
 
     public void handleDisconnectCashRegister(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("You want disconnect cash register number  " + cashRegisterDisconnection.getText());
+        alert.setContentText("You want disconnect cash register number  " + countOfDisconnect.getValue());
         alert.showAndWait();
         //опрацювати відповідь
-        station.useReservedCashRegister(station.getCashRegisters().get(Integer.parseInt(cashRegisterDisconnection.getText())));
+        station.useReservedCashRegister(station.getCashRegisters().get(countOfDisconnect.getValue()));
     }
 
     //додати таймер, який буде перевіряти стан черг, і оновлюватиме дані в таблиці.
