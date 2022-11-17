@@ -402,7 +402,7 @@ public class ApplicationController implements Initializable {
             cashes.get(0).setServiceTime(new Random().nextInt(servingTimeMin, servingTimeMax));
         }
         //get from min and max
-        if(!this.intervalStation.getText().equals("")){
+        if(this.intervalStation.getText().equals("")){
         //check if it is corrcet because i dont remember
             var generationStrategy = new RandomGenerateStrategy(servingTimeMin,servingTimeMax);
             generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
