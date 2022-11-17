@@ -394,11 +394,15 @@ public class ApplicationController implements Initializable {
         // should be get from ui
         var capacity = Integer.parseInt(this.саpacityStation.getText());
         station = new Station(entran, cashes, new QueueResolver(), capacity);
-        int servingTimeMin = Integer.parseInt(this.minServiceTime.getText());
-        int servingTimeMax = Integer.parseInt(this.maxServiceTime.getText());
-        cashes.get(0).setServiceTime(new Random().nextInt(servingTimeMin, servingTimeMax));
+        int servingTimeMin = 0;
+        int servingTimeMax = 0;
+        if(!this.minServiceTime.getText().equals("")) {
+            servingTimeMin = Integer.parseInt(this.minServiceTime.getText());
+            servingTimeMax = Integer.parseInt(this.maxServiceTime.getText());
+            cashes.get(0).setServiceTime(new Random().nextInt(servingTimeMin, servingTimeMax));
+        }
         //get from min and max
-        if(this.intervalStation.getText().equals("")){
+        if(!this.intervalStation.getText().equals("")){
         //check if it is corrcet because i dont remember
             var generationStrategy = new RandomGenerateStrategy(servingTimeMin,servingTimeMax);
             generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
@@ -437,6 +441,7 @@ public class ApplicationController implements Initializable {
         //опрацювати відповідь
         System.out.println(countOfDisconnect.getValue().intValue());
         station.useReservedCashRegister(station.getCashRegisters().get(countOfDisconnect.getValue().intValue()-1));
+
     }
 
     //додати таймер, який буде перевіряти стан черг, і оновлюватиме дані в таблиці.

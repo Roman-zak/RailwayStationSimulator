@@ -38,6 +38,10 @@ public class CashRegister implements ICashRegister{
         this.customersInQueue = customers;
     }
 
+    @Override
+    public void clearList(){
+        this.customersInQueue.clear();
+    }
     public  int getServiceTime() {
         return serviceTime;
     }
