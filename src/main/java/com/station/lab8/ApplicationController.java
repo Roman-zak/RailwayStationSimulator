@@ -394,21 +394,27 @@ public class ApplicationController implements Initializable {
         // should be get from ui
         var capacity = Integer.parseInt(this.саpacityStation.getText());
         station = new Station(entran, cashes, new QueueResolver(), capacity);
-
-        //get from min and max
         int servingTimeMin = Integer.parseInt(this.minServiceTime.getText());
         int servingTimeMax = Integer.parseInt(this.maxServiceTime.getText());
-        cashes.get(0).setServiceTime(new Random().nextInt(servingTimeMin, servingTimeMax));//check if it is corrcet because i dont remember
-
+        cashes.get(0).setServiceTime(new Random().nextInt(servingTimeMin, servingTimeMax));
+        //get from min and max
+        if(this.intervalStation.getText().equals("")){
+        //check if it is corrcet because i dont remember
+            var generationStrategy = new RandomGenerateStrategy(servingTimeMin,servingTimeMax);
+            generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
+        }
         // переглянути значення   в полі інтервалу, якщо воно порожнє то вибираємо стратегію з радномним,
         // межі встановлюємо як  int servingTimeMin =300;
         //        int servingTimeMax =500; інакше new IntervalGenerateStrategy(зі значенням з інпуту);
 
         //need add component for choosing strategy and input the interval;
 
-        var generationStrategy = new IntervalGenerateStrategy(Integer.parseInt(this.intervalStation.getText()));
-        generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
 
+
+        else {
+            var generationStrategy = new IntervalGenerateStrategy(Integer.parseInt(this.intervalStation.getText()));
+            generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
+        }
         ArrayList<ILogger> loggers = new ArrayList<>();
 
         loggers.add(new TableLogger(valueOfLogger));
