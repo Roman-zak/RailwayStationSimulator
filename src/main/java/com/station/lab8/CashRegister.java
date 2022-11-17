@@ -50,6 +50,7 @@ public class CashRegister implements ICashRegister{
         return queue;
     }
 
+    @Override
     public void setQueue(PriorityQueue<ICustomer> queue) {
         this.queue = queue;
     }
@@ -94,7 +95,7 @@ public class CashRegister implements ICashRegister{
         this.refreshCustomersInQueue();
     }
     @Override
-    public void addCustomer(Customer customer){
+    public void addCustomer(ICustomer customer){
         this.queue.add(customer);
         this.refreshCustomersInQueue();
     }
@@ -131,5 +132,10 @@ public class CashRegister implements ICashRegister{
             CustomerWrapper cWrapper = new CustomerWrapper(c.getId(), c.getTicketsCount(), c.getStatus(), c.getEntrance().toString());
             customersInQueue.add(cWrapper);
         });
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }

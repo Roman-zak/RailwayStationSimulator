@@ -4,11 +4,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Customer implements ICustomer {
- /*   private final SimpleIntegerProperty posX = new SimpleIntegerProperty();
-    private final SimpleIntegerProperty posY = new SimpleIntegerProperty();
-    private final SimpleIntegerProperty countTickets = new SimpleIntegerProperty();
-    private final SimpleIntegerProperty curId = new SimpleIntegerProperty();
-*/
+
     private int ticketsCount;
     static int IdCount = 0;
     private final int id;
@@ -32,28 +28,10 @@ public class Customer implements ICustomer {
         this.status = status;
         this.entrance = entrance;
 
-      /*  countTickets.set(ticketsCount);
-        if (entrance != null) {
-            posX.set(entrance.getPosition().getX());
-            posY.set(entrance.getPosition().getY());
-        }*/
+
     }
 
-   /* public Integer getPosX() {
-        return posX.get();
-    }
 
-    public Integer getPosY() {
-        return posY.get();
-    }
-
-    public Integer getCountTickets() {
-        return countTickets.get();
-    }
-
-    public Integer getCurId() {
-        return curId.get();
-    }*/
 
     @Override
     public void setTicketsCount(int ticketsCount) {
@@ -69,10 +47,7 @@ public class Customer implements ICustomer {
     @Override
     public void setEntrance(Entrance entrance) {
         this.entrance = entrance;
-      /*  if (entrance != null) {
-            posX.set(entrance.getPosition().getX());
-            posY.set(entrance.getPosition().getY());
-        }*/
+
     }
 
 

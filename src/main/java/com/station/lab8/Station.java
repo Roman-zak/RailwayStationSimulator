@@ -1,5 +1,4 @@
 package com.station.lab8;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.List;
 
@@ -68,13 +67,20 @@ public class Station {
         getCurrentPeopleCount();
         return currentPeopleCount >= capacity;
     }
-    public void updateQueues(Customer customer){
+    public void updateQueues(ICustomer customer){
         queueResolver.getPosition(cashRegisters,customer.getEntrance().getPosition()).addCustomer(customer);
 
     }
     public void useReservedCashRegister(ICashRegister stoppedCashRegister){
-        var reservedCashRegister = (CashRegister)this.cashRegisters.stream().filter(c -> c.isReserved());
         stoppedCashRegister.makeBreak();
+        var reservedCashRegister = this.cashRegisters.stream().filter(c -> c.isReserved()).findFirst().get();
+
+        if(reservedCashRegister==null){
+            var queue = stoppedCashRegister.getQueue();
+            queue.forEach(q->updateQueues(q));
+            return;
+        }
+
         reservedCashRegister.setQueue(stoppedCashRegister.getQueue());
         reservedCashRegister.setServiceable(true);
         new Thread(reservedCashRegister).start();

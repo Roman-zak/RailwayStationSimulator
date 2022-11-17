@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
 
-public interface ICashRegister extends Runnable {
+public interface ICashRegister extends Runnable, Comparable {
 
     void serve();
     void makeBreak();
@@ -12,9 +12,10 @@ public interface ICashRegister extends Runnable {
     boolean isReserved();
     PriorityQueue<ICustomer> getQueue();
     Position getPosition();
-    void addCustomer(Customer customer);
+    void addCustomer(ICustomer customer);
     void setServiceTime(int time);
     int getServiceTime();
     void setServiceable(boolean serviceable);
+    void setQueue(PriorityQueue<ICustomer> queue);
 
 }

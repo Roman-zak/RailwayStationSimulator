@@ -15,7 +15,7 @@ public class TableLogger implements ILogger {
     @Override
     public void log(String msg) {
         var endIndex = msg.indexOf(' ');
-        logs.add(new LogWrapper(random.nextInt(10000) ,msg.substring(endIndex,msg.length()) ));
+        logs.add(new LogWrapper(Integer.parseInt(msg.substring(0,endIndex)) ,msg.substring(endIndex,msg.length()) ));
 
     }
 }
