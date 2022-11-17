@@ -14,7 +14,6 @@ public class CashRegister implements ICashRegister{
     private static int serviceTime=1000;
 
     public static List<ILogger> loggers = new ArrayList<>();
-
     private PriorityQueue<ICustomer> queue;
     private ObservableList<CustomerWrapper> customersInQueue;
     private boolean serviceable;

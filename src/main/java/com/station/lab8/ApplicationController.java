@@ -77,8 +77,6 @@ public class ApplicationController implements Initializable {
     @FXML
     TableView<CustomerWrapper> cashRegisterSpare;
     @FXML
-    TableView<LogWrapper> logView;
-    @FXML
     Label labelCashRegister1;
     @FXML
     TableColumn<CustomerWrapper, Integer> cashRegisterSpareId;
@@ -112,6 +110,8 @@ public class ApplicationController implements Initializable {
     TableView<EntranceWrapper> tableEntrances;
     @FXML
     TableView<CashRegisterWrapper> tableCashRegisters;
+    @FXML
+    TableView<LogWrapper> tableLoggers;
     @FXML
     TableColumn<CashRegisterWrapper, String> cashRegisterPositionX;
     @FXML
@@ -286,7 +286,7 @@ public class ApplicationController implements Initializable {
         countOfCashRegisters.setItems(valueOfComboBox);
         countOfEntrances.setItems(valueOfComboBox);
         countOfDisconnect.setItems(valueOfDisconnect);
-
+        tableLoggers.setItems(valueOfLogger);
     }
 
     public void handleChangeCountOfEntrances(ActionEvent event) {
