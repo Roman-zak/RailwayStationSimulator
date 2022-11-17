@@ -365,33 +365,40 @@ public class ApplicationController implements Initializable {
         int countCash = countOfCashRegisters.getValue();
         int countEntrance = countOfEntrances.getValue();
         List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);
+
+        List<ObservableList<CustomerWrapper>> customersCashRegisters = new ArrayList<>();
+        customersCashRegisters.add(this.customersCashRegister1);
+        customersCashRegisters.add(this.customersCashRegister2);
+        customersCashRegisters.add(this.customersCashRegister3);
+        customersCashRegisters.add(this.customersCashRegister4);
+        customersCashRegisters.add(this.customersCashRegister5);
+
         //get real data from table
         //for now
         for (int i = 0; i < countCash; ++i) {
             cashes.add(new CashRegister(new Position(Integer.parseInt(cashRegisters.get(i).positionX),
-                    Integer.parseInt(cashRegisters.get(i).positionY))));
+                    Integer.parseInt(cashRegisters.get(i).positionY)), customersCashRegisters.get(i)));
         }
 
         var entran = new ArrayList<Entrance>(countEntrance);
         //get real data from table
         //for now
-        for (int i = 0; i < countCash; ++i) {
+        for (int i = 0; i < countEntrance; ++i) {
             entran.add(new Entrance(new Position(Integer.parseInt(entrances.get(i).positionX),
                     Integer.parseInt(entrances.get(i).positionY))));
         }
 
         //add rservedCashes
 
-        cashes.add(new CashRegister(new Position(5,5),false,true));
+        cashes.add(new CashRegister(new Position(5,5),false,true, this.customersCashRegisterSpare));
         // should be get from ui
-        var capacity = 30;
+        var capacity = Integer.parseInt(this.саpacityStation.getText());
         station = new Station(entran, cashes, new QueueResolver(), capacity);
 
-
         //get from min and max
-        int servingTimeMin =300;
-        int servingTimeMax =500;
-        cashes.get(0).setServiceTime(new Random().nextInt(300,500));//check if it is corrcet because i dont remember
+        int servingTimeMin = Integer.parseInt(this.minServiceTime.getText());
+        int servingTimeMax = Integer.parseInt(this.maxServiceTime.getText());
+        cashes.get(0).setServiceTime(new Random().nextInt(servingTimeMin, servingTimeMax));//check if it is corrcet because i dont remember
 
         // переглянути значення   в полі інтервалу, якщо воно порожнє то вибираємо стратегію з радномним,
         // межі встановлюємо як  int servingTimeMin =300;
@@ -399,7 +406,7 @@ public class ApplicationController implements Initializable {
 
         //need add component for choosing strategy and input the interval;
 
-        var generationStrategy = new IntervalGenerateStrategy(200);
+        var generationStrategy = new IntervalGenerateStrategy(Integer.parseInt(this.intervalStation.getText()));
         generatorPeople = new ThreadGeneratorPeople(generationStrategy, station, 70);
 
         ArrayList<ILogger> loggers = new ArrayList<>();
@@ -409,7 +416,6 @@ public class ApplicationController implements Initializable {
         CashRegister.setLoggers(loggers);
         new Thread(generatorPeople).start();
         station.startWork();
-
     }
 
     //function for stop working
