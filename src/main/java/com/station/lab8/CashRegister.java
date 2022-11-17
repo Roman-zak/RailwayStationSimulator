@@ -84,10 +84,15 @@ public class CashRegister implements ICashRegister{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        this.queue.poll();
-        System.out.println("Deleted");
+
+        if(this.queue.peek().getTicketsCount() > 1){
+            this.queue.peek().setTicketsCount(this.queue.peek().getTicketsCount() - 1);
+        }
+        else{
+            this.queue.poll();
+        }
+
         this.refreshCustomersInQueue();
-        System.out.println("After refresh");
     }
     @Override
     public void addCustomer(Customer customer){
@@ -103,7 +108,6 @@ public class CashRegister implements ICashRegister{
     @Override
     public void run() {
         while(serviceable){
-            System.out.println("check if is empty");
             System.out.println(queue.isEmpty());
             if (!queue.isEmpty()) {
                 this.serve();
@@ -121,30 +125,12 @@ public class CashRegister implements ICashRegister{
     }
 
     private void refreshCustomersInQueue(){
-//        var newQueue = new PriorityQueue<ICustomer>();
-//
-//        this.queue.forEach(q ->{
-//            ICustomer c = new Customer();
-//        });
-//
         this.customersInQueue.clear();
 
         List<ICustomer> newCustomers = new ArrayList<>(this.queue);
-
         newCustomers.forEach(c -> {
             CustomerWrapper cWrapper = new CustomerWrapper(c.getId(), c.getTicketsCount(), c.getStatus(), c.getEntrance().toString());
             customersInQueue.add(cWrapper);
         });
-
-//        System.out.println("Start");
-//        this.queue.forEach(q -> {
-//            System.out.println(q.getStatus());
-//        });
-//        System.out.println("End");
-//
-//        this.queue.forEach((q) -> {
-//            CustomerWrapper c = new CustomerWrapper(q.getId(), q.getTicketsCount(), q.getStatus(), q.getEntrance().toString());
-//            customersInQueue.add(c);
-//        });
     }
 }

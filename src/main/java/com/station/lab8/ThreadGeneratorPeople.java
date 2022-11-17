@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ThreadGeneratorPeople implements IThreadGeneratorPeople {
 
     public int minTicket=1;
-    public  int maxTicket=11;
+    public  int maxTicket=6;
 
     Boolean generating;
     Station station ;//= Station.getInstance();
