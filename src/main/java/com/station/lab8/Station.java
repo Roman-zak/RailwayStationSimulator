@@ -1,6 +1,7 @@
 package com.station.lab8;
 
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Station {
   //  private static Station instance;
@@ -72,9 +73,11 @@ public class Station {
 
     }
     public void useReservedCashRegister(ICashRegister stoppedCashRegister){
+        if(!stoppedCashRegister.isServiceable())
+            return;
         stoppedCashRegister.makeBreak();
 
-        var reservedCashRegister = this.cashRegisters.stream().filter(c -> c.isReserved()).findFirst().get();
+        var reservedCashRegister = this.cashRegisters.stream().filter(c -> c.isReserved()&&!c.isServiceable()).findFirst().orElse(null);
 
         if(reservedCashRegister==null){
             var queue = stoppedCashRegister.getQueue();
@@ -82,8 +85,11 @@ public class Station {
             return;
         }
 
-        reservedCashRegister.setQueue(stoppedCashRegister.getQueue());
+
+
+        reservedCashRegister.setQueue( stoppedCashRegister.getQueue());
         reservedCashRegister.setServiceable(true);
+
         new Thread(reservedCashRegister).start();
     }
 

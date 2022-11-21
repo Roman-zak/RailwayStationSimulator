@@ -239,20 +239,34 @@ public class ApplicationController implements Initializable {
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
+                        System.out.println("pos");
                         ((CashRegisterWrapper) t.getTableView().getItems().get(
+
                                 t.getTablePosition().getRow())
                         ).setPosY(t.getNewValue());
                     }
                 }
         );
 
-        cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
         cashRegisterReserved.setCellFactory(tc -> new CheckBoxTableCell<>());
+        cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
+
         cashRegisterReserved.setEditable(true);
+        cashRegisterReserved.setOnEditStart(  new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                System.out.println("reserved");
+                ((CashRegisterWrapper) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setIsReserved(t.getNewValue());
+            }
+        });
+
         cashRegisterReserved.setOnEditCommit(
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                        System.out.println("reserved");
                         ((CashRegisterWrapper) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setIsReserved(t.getNewValue());
@@ -266,6 +280,7 @@ public class ApplicationController implements Initializable {
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                        System.out.println("setIsServiceable");
                         ((CashRegisterWrapper) t.getTableView().getItems().get(
                                 t.getTablePosition().getRow())
                         ).setIsServiceable(t.getNewValue());

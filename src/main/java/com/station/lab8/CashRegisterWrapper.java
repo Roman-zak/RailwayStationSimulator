@@ -10,8 +10,8 @@ public class CashRegisterWrapper {
     private final SimpleBooleanProperty isServiceable;
     public String positionX;
     public String positionY;
-    public Boolean reserved;
-    public Boolean serviceable;
+    public Boolean reserved = false;
+    public Boolean serviceable=true;
 
     public CashRegisterWrapper(String x, String y, Boolean r, Boolean s){
         this.posX = new SimpleStringProperty(x);
