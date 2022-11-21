@@ -73,7 +73,7 @@ public class Station {
     }
     public void useReservedCashRegister(ICashRegister stoppedCashRegister){
         stoppedCashRegister.makeBreak();
-        stoppedCashRegister.clearList();
+
         var reservedCashRegister = this.cashRegisters.stream().filter(c -> c.isReserved()).findFirst().get();
 
         if(reservedCashRegister==null){
