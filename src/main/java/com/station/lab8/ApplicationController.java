@@ -117,10 +117,6 @@ public class ApplicationController implements Initializable {
     @FXML
     TableColumn<CashRegisterWrapper, String> cashRegisterPositionY;
     @FXML
-    TableColumn<CashRegisterWrapper, Boolean> cashRegisterReserved;
-    @FXML
-    TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
-    @FXML
     TableColumn<EntranceWrapper, String> entrancePositionX;
     @FXML
     TableColumn<EntranceWrapper, String> entrancePositionY;
@@ -249,36 +245,9 @@ public class ApplicationController implements Initializable {
                 }
         );
 
-        cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
-        cashRegisterReserved.setCellFactory(tc -> new CheckBoxTableCell<>());
-        cashRegisterReserved.setEditable(true);
-        cashRegisterReserved.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
-                        ((CashRegisterWrapper) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setIsReserved(t.getNewValue());
-                    }
-                }
-        );
-        cashRegisterServiceable.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsServiceable()));
-        cashRegisterServiceable.setCellFactory(tc -> new CheckBoxTableCell<>());
-        cashRegisterServiceable.setEditable(true);
-        cashRegisterServiceable.setOnEditCommit(
-                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
-                    @Override
-                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
-                        ((CashRegisterWrapper) t.getTableView().getItems().get(
-                                t.getTablePosition().getRow())
-                        ).setIsServiceable(t.getNewValue());
-                    }
-                }
-        );
+
         cashRegisterPositionX.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posX"));
         cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
-        cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
-        cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
 
 
         tableCashRegisters.setItems(cashRegisters);
