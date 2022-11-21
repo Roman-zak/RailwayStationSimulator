@@ -14,10 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ApplicationController implements Initializable {
     @FXML
@@ -116,6 +113,10 @@ public class ApplicationController implements Initializable {
     TableColumn<CashRegisterWrapper, String> cashRegisterPositionX;
     @FXML
     TableColumn<CashRegisterWrapper, String> cashRegisterPositionY;
+    @FXML
+    TableColumn<CashRegisterWrapper, Boolean> cashRegisterReserved;
+    @FXML
+    TableColumn<CashRegisterWrapper, Boolean> cashRegisterServiceable;
     @FXML
     TableColumn<EntranceWrapper, String> entrancePositionX;
     @FXML
@@ -238,16 +239,58 @@ public class ApplicationController implements Initializable {
                 new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, String>>() {
                     @Override
                     public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, String> t) {
+                        System.out.println("pos");
                         ((CashRegisterWrapper) t.getTableView().getItems().get(
+
                                 t.getTablePosition().getRow())
                         ).setPosY(t.getNewValue());
                     }
                 }
         );
 
+        cashRegisterReserved.setCellFactory(tc -> new CheckBoxTableCell<>());
+        cashRegisterReserved.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsReserved()));
 
+        cashRegisterReserved.setEditable(true);
+        cashRegisterReserved.setOnEditStart(  new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                System.out.println("reserved");
+                ((CashRegisterWrapper) t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).setIsReserved(t.getNewValue());
+            }
+        });
+
+        cashRegisterReserved.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                        System.out.println("reserved");
+                        ((CashRegisterWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setIsReserved(t.getNewValue());
+                    }
+                }
+        );
+        cashRegisterServiceable.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getIsServiceable()));
+        cashRegisterServiceable.setCellFactory(tc -> new CheckBoxTableCell<>());
+        cashRegisterServiceable.setEditable(true);
+        cashRegisterServiceable.setOnEditCommit(
+                new EventHandler<TableColumn.CellEditEvent<CashRegisterWrapper, Boolean>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<CashRegisterWrapper, Boolean> t) {
+                        System.out.println("setIsServiceable");
+                        ((CashRegisterWrapper) t.getTableView().getItems().get(
+                                t.getTablePosition().getRow())
+                        ).setIsServiceable(t.getNewValue());
+                    }
+                }
+        );
         cashRegisterPositionX.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posX"));
         cashRegisterPositionY.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, String>("posY"));
+        cashRegisterReserved.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isReserved"));
+        cashRegisterServiceable.setCellValueFactory(new PropertyValueFactory<CashRegisterWrapper, Boolean>("isServiceable"));
 
 
         tableCashRegisters.setItems(cashRegisters);
@@ -329,25 +372,31 @@ public class ApplicationController implements Initializable {
 //        this.cashRegisterSpare.setVisible(false);
 //        this.labelCashRegisterSpare.setVisible(false);
     }
-
+    List<ObservableList<CustomerWrapper>> customersCashRegisters;
+    Timer timer ;
     public void handleStart(ActionEvent event) {
+
+
         int countCash = countOfCashRegisters.getValue();
         int countEntrance = countOfEntrances.getValue();
         List<ICashRegister> cashes = new ArrayList<ICashRegister>(countCash);
 
-        List<ObservableList<CustomerWrapper>> customersCashRegisters = new ArrayList<>();
+       customersCashRegisters = new ArrayList<>();
         customersCashRegisters.add(this.customersCashRegister1);
         customersCashRegisters.add(this.customersCashRegister2);
         customersCashRegisters.add(this.customersCashRegister3);
         customersCashRegisters.add(this.customersCashRegister4);
         customersCashRegisters.add(this.customersCashRegister5);
+        customersCashRegisters.add(this.customersCashRegisterSpare);
 
         //get real data from table
         //for now
         for (int i = 0; i < countCash; ++i) {
             cashes.add(new CashRegister(new Position(Integer.parseInt(cashRegisters.get(i).positionX),
-                    Integer.parseInt(cashRegisters.get(i).positionY)), customersCashRegisters.get(i)));
+                    Integer.parseInt(cashRegisters.get(i).positionY))));
+
         }
+
 
         var entran = new ArrayList<Entrance>(countEntrance);
         //get real data from table
@@ -359,7 +408,7 @@ public class ApplicationController implements Initializable {
 
         //add rservedCashes
 
-        cashes.add(new CashRegister(new Position(5,5),false,true, this.customersCashRegisterSpare));
+        cashes.add(new CashRegister(new Position(5,5),false,true));
         // should be get from ui
         var capacity = Integer.parseInt(this.саpacityStation.getText());
         station = new Station(entran, cashes, new QueueResolver(), capacity);
@@ -395,12 +444,21 @@ public class ApplicationController implements Initializable {
         CashRegister.setLoggers(loggers);
         new Thread(generatorPeople).start();
         station.startWork();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                updateTable();
+            }
+        },0,200);
+
     }
 
     //function for stop working
     public void handleStop(ActionEvent event) {
         station.endWork();
         generatorPeople.stopGeneration();
+        timer.cancel();timer.purge();
     }
 
     public void handleDisconnectCashRegister(ActionEvent event) {
@@ -411,7 +469,52 @@ public class ApplicationController implements Initializable {
         System.out.println(countOfDisconnect.getValue().intValue());
         station.useReservedCashRegister(station.getCashRegisters().get(countOfDisconnect.getValue().intValue()-1));
 
+
     }
+    void updateTable(){
+        System.out.println("start");
+        var cashes = station.getCashRegisters();
+
+        int cashesCount = cashes.size();
+        for( int i=0;i<cashesCount-1;++i){
+            if(cashes.get(i).isServiceable()){
+                customersCashRegisters.get(i).clear();
+                List<ICustomer> newCustomers = new ArrayList<>(cashes.get(i).getQueue());
+
+                int finalI = i;
+                newCustomers.forEach(c -> {
+                    CustomerWrapper cWrapper = new CustomerWrapper(c.getId(), c.getTicketsCount(), c.getStatus(), c.getEntrance().toString());
+                    customersCashRegisters.get(finalI).add(cWrapper);
+
+                });
+            }
+        }
+        if(cashes.get(cashesCount-1).isServiceable()&&cashes.get(cashesCount-1).isReserved()){
+            customersCashRegisters.get(customersCashRegisters.size()-1).clear();
+            List<ICustomer> newCustomers = new ArrayList<>(cashes.get(cashesCount-1).getQueue());
+
+            newCustomers.forEach(c -> {
+                CustomerWrapper cWrapper = new CustomerWrapper(c.getId(), c.getTicketsCount(), c.getStatus(), c.getEntrance().toString());
+                customersCashRegisters.get(customersCashRegisters.size()-1).add(cWrapper);
+
+            });
+        }
+
+
+        cashRegister1.refresh();
+
+        cashRegister2.refresh();
+        cashRegister3.refresh();
+        cashRegister4.refresh();
+        cashRegister5.refresh();
+        cashRegisterSpare.refresh();
+        System.out.println("end");
+
+    }
+    void timerTask(){
+
+    }
+
 
     //додати таймер, який буде перевіряти стан черг, і оновлюватиме дані в таблиці.
 }

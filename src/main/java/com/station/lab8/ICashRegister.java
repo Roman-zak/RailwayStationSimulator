@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 
 public interface ICashRegister extends Runnable, Comparable {
 
-    void clearList();
+
     void serve();
     void makeBreak();
     boolean isServiceable();

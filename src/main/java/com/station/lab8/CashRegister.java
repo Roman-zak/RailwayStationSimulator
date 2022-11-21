@@ -15,33 +15,30 @@ public class CashRegister implements ICashRegister{
 
     public static List<ILogger> loggers = new ArrayList<>();
     private PriorityQueue<ICustomer> queue;
-    private ObservableList<CustomerWrapper> customersInQueue;
+
     private boolean serviceable;
     private boolean reserved;
     private Position position;
 
     public CashRegister() {
     }
-    public CashRegister(Position position, boolean serviceable, boolean reserved, ObservableList<CustomerWrapper> customers) {
-        this(new PriorityQueue<>(),serviceable, reserved,position, customers);
+    public CashRegister(Position position, boolean serviceable, boolean reserved) {
+        this(new PriorityQueue<>(),serviceable, reserved,position);
     }
-    public  CashRegister(Position position, ObservableList<CustomerWrapper> customers){
-        this(new PriorityQueue<>(),true, false,position, customers);
+    public  CashRegister(Position position){
+        this(new PriorityQueue<>(),true, false,position);
     }
 
-    public CashRegister(PriorityQueue<ICustomer> queue, boolean serviceable, boolean reserved, Position position, ObservableList<CustomerWrapper> customers) {
+    public CashRegister(PriorityQueue<ICustomer> queue, boolean serviceable, boolean reserved, Position position) {
         this.queue = queue;
 
         this.serviceable = serviceable;
         this.reserved = reserved;
         this.position = position;
-        this.customersInQueue = customers;
+
     }
 
     @Override
-    public void clearList(){
-        this.customersInQueue.clear();
-    }
     public  int getServiceTime() {
         return serviceTime;
     }
@@ -80,8 +77,8 @@ public class CashRegister implements ICashRegister{
     public void serve() {
 
         var custToRemove = this.queue.peek();
-        loggers.forEach(l->l.log(String.format("%d Served by station with position x:%d y%d: give %d tickets"
-                ,custToRemove.getId(), custToRemove.getEntrance().getPosition().getX(),
+        loggers.forEach(l->l.log(String.format("%d Served by station(reserved %s) with position x:%d y%d: give %d tickets"
+                ,custToRemove.getId(), reserved, custToRemove.getEntrance().getPosition().getX(),
                 custToRemove.getEntrance().getPosition().getY(), custToRemove.getTicketsCount())));
         try {
             Thread.sleep(serviceTime);
@@ -96,12 +93,11 @@ public class CashRegister implements ICashRegister{
             this.queue.poll();
         }
 
-        this.refreshCustomersInQueue();
     }
     @Override
     public void addCustomer(ICustomer customer){
         this.queue.add(customer);
-        this.refreshCustomersInQueue();
+
     }
 
     @Override
@@ -128,15 +124,6 @@ public class CashRegister implements ICashRegister{
         this.position = position;
     }
 
-    private void refreshCustomersInQueue(){
-        this.customersInQueue.clear();
-
-        List<ICustomer> newCustomers = new ArrayList<>(this.queue);
-        newCustomers.forEach(c -> {
-            CustomerWrapper cWrapper = new CustomerWrapper(c.getId(), c.getTicketsCount(), c.getStatus(), c.getEntrance().toString());
-            customersInQueue.add(cWrapper);
-        });
-    }
 
     @Override
     public int compareTo(Object o) {
